@@ -1,0 +1,695 @@
+\section{Modeling the cosmic ray data}
+
+% We adopt a Bayesian
+% approach for directional coincidence assessment based on multilevel modeling,
+% where upper levels in a model describe properties of potentially associated
+% source populations and radiation propagation, and lower levels describe
+% measurement errors and survey selection effects.
+
+The basic statistical problem is to quantify evidence for associating some
+number (possibly zero) of cosmic rays with each member of a candidate
+source population.  The key observable is the cosmic ray direction; a set of
+rays with directions near a putative host comprises a multiplet potentially
+associated with that host.  This gives the problem the flavor of model-based
+clustering (of points on the celestial sphere rather than in a Euclidean space),
+but with some novel features:
+\begin{itemize}
+\item The model must account for measurement error in cosmic ray properties.
+
+\item Observatories provide an incomplete and distorted sample of cosmic rays,
+so the model must account for random truncation and nonuniform thinning.
+
+\item The most realistic astrophysical models imply a joint distribution for
+the properties of the cosmic rays assigned to a particular source that is
+exchangeable rather than a product of independent distributions (as is the
+case in standard clustering).
+
+\item The number of cosmic rays is informative about the intensity scale of
+the cosmic ray sources so the binomial point process model underlying
+standard generative clustering approaches is not appropriate.
+\end{itemize}
+
+%1: Sources as a population
+%2: Production per source
+%3: Propagation
+%4: Measurement
+
+To account for these and other complexities, we model the data using a
+hierarchical Bayesian framework with four levels:
+\begin{enumerate}
+\item {\em Source properties}:  At the top level we specify the properties
+of the sources of cosmic rays.  This may include the choice of a candidate
+source population of identified objects (e.g., a particular galaxy
+population), and/or specification of the properties of a population of
+unidentified sources.  For a given candidate source population, we must
+specify source directions and cosmic ray intensities.  The simplest case is
+a standard candle model, with each source having the same cosmic ray
+intensity.  More generally, we may specify a (non-degenerate) distribution
+of source intensities; this corresponds to specifying a ``luminosity
+function'' in other astronomical contexts.  For a population of unidentified
+sources, we must specify a directional distribution (isotropic in the
+simplest case) as well as an intensity distribution.
+\item {\em Cosmic ray production}:  We model the production of cosmic rays
+from each source with a marked Poisson point process model for latent cosmic
+ray properties.  The incident cosmic ray arrival times have a homogeneous
+intensity measure in time, and the marks include the cosmic ray energies,
+and latent categorical labels identifying the source of each ray.
+\item {\em Cosmic ray propagation}:  Next we model magnetic deflection of
+the rays, scattering their directions from the source directions.  
+This requires introducing a latent arrival direction parameter for each ray.
+Here we adopt a simple phenomenological model with a single parameter
+specifying a typical scattering scale between the source and arrival
+directions.  As the data become more abundant and detailed, the framework
+can accomodate more complex models, e.g., with parameters explicitly
+describing cosmic magnetic fields and cosmic ray composition.
+\item {\em Detection and measurement}:  Last, we model detection and
+measurement, accounting for truncation and thinning of the incident
+cosmic ray flux, and measurement errors for directions and energies.
+\end{enumerate}
+
+Figure~\ref{fig:levels} schematically depicts the structure of our
+framework, including identification of the various random variables
+appearing in the calculations described below.  The variables will be
+defined as they appear in the detailed development below; the figure serves
+as visual reference to the notation.  The figure is not a graphical model
+per se.  Rather, our models specify probability distributions over a space
+of graphs, each graph corresponding to a possible set of associations of the
+cosmic rays with particular sources.  This framework builds directly on an
+earlier multilevel Bayesian model we developed to assess evidence that some
+sources of gamma-ray bursts repeat \cite{LLW96}; this model, too, worked in
+terms of probability distributions over candidate assignments.  See
+\cite{Loredo12-Coinc} for a broad discussion of Bayesian methods for
+assessing spatio-temporal coincidences in astronomical data.
+
+\begin{figure}
+\centerline{\includegraphics[clip=true,width=\textwidth]{CRCoincLevels.eps}}
+\caption{Schematic depiction of the levels in our cosmic ray association
+models, identifying random variables appearing in each level, including
+parameters of interest (bold red labels), latent variables representing cosmic ray
+properties that are not directly observable (slant type labels), and
+observables (bold blue labels).}
+\label{fig:levels}
+\end{figure}
+
+Our framework is designed to enable investigators to:
+(1)~Ascertain which cosmic rays (if any) may be associated with specific
+sources with high probability; (2)~Estimate luminosity function parameters
+for populations of astrophysical sources; (3)~Estimate the proportion of all
+detected cosmic rays generated by each population; (4)~Estimate parameters
+describing the composition-dependent effects of cosmic magnetic fields;
+(5)~Investigate whether cosmic rays from a single source are deflected
+independently or share part of their deflection history (resulting in
+correlated deflections).  Task (5) is not attempted here but will be
+investigated in the future.
+
+%..............................................................................
+\subsection{Cosmic ray source properties}
+
+% Note that the cosmic rays from a particular source arrive from
+% different directions, so we cannot think of the flux $F_k$ in regard to
+% a detector with unit area normal to the source direction; there is
+% no one such direction.
+
+We do not anticipate the UHECR flux passing through a volume element at the
+Earth to vary in time over accessible time scales, so we model the
+arrival rate into a small volume of space from any particular direction as a
+homogeneous Poisson point process in time.  Let $F_k$ denote the UHECR flux
+from source $k$.  $F_k$ is the expected number of UHECRs per unit time from
+source $k$ that would enter a fully exposed spherical detector of unit
+cross-sectional area.  A cosmic ray source model must specify the directions
+and fluxes of candidate sources.  In our framework, a candidate source
+catalog specifies source directions for a fixed number of potential sources,
+$N_A$ ($N_A = 17$ for the G10 AGN catalog).  In addition, we presume some
+cosmic rays may come from uncatalogued sources, so we introduce a background
+component, labeled by $k=0$, considered to be a population of isotropically
+distributed ``background'' sources.   We presume the background sources to
+be numerous and to each have relatively low cosmic ray fluxes, so that at
+most a single cosmic ray should be detected from any given background source
+(i.e., we do not consider clustering of cosmic rays assigned to the
+background).  In this limit, the background component may be described
+by a single parameter, $F_0$, denoting the total flux from the entire
+background population.
+
+%\enote{In regard to the last comment:  I think we are implicitly presuming
+%only a single CR from each background source.  This may be a slightly
+%inconsistent simplification that should be noted.  E.g., for the radiant
+%model, if a single unidentified background source produces a multiplet, in
+%the radiant model this could lead to a ``ray'' of background sources with
+%correlated directions but no apparent source.  For the buckshot model, there
+%could be clusters with no apparent center.  This could be handled by
+%introducing separate parameters for the total background flux, and the
+%background source number density. Let's not go there for now!}
+
+A model must specify a distribution for $\{F_k\} = \{F_0, \Fvec\}$; in
+astronomical lingo, this corresponds to specifying a ``luminosity function''
+for the background and source populations.  As a simple starting point, we
+treat $F_0$ as a free parameter, and adopt
+a ``standard candle'' model specifying the $N_A$ candidate host fluxes, $\Fvec$,
+via a single parameter as follows.  We assume all sources emit isotropically
+with the same intensity, $I$ (number of cosmic rays per unit time), so the
+flux from a source can be written as $F_k = I/D_k^2$ (the inverse-square
+law), with $D_k$ the (known) distance to source $k$ (there could also be
+distance- and energy-dependent attenuation due to cosmic ray-photon
+interactions, but the sources we consider here are close enough that such
+attenuation should be negligible).  The total flux from the sources is $F_A
+= \sum_k F_k$, and we adopt $F_A$ as the source intensity parameter rather
+than $I$.  Thus $F_k = w_k F_A$, with the weights $w_k$ given by
+\be
+w_k = \frac{1/D_k^2}{\sum_{j=1}^{N_A} 1/D_j^2},
+\label{wt-def}
+\ee
+for $k=1$ to $N_A$.
+
+%..............................................................................
+\subsection{Top-Level Prior Specification}
+
+We must specify a prior distribution for $F_0$ and $F_A$.
+Earlier observations constrained the total UHECR flux.  In our association
+model, the total flux is $F_T = F_0 + F_A$.  For the null model, there is
+only one top-level parameter, the total flux from an isotropic distribution
+of source directions.  So we adopt $F_T$ as a top-level parameter,
+common to all models.  For association models, this motivates an alternative
+parameterization that switches from $(F_0, F_A)$ to $(F_T, f)$, where $f =
+F_A/(F_0 + F_A)$ is the fraction of the total flux attributed to the
+candidate host population.
+In this parameterization, we can specify a common total flux prior
+for all models.  This is astrophysically sensible since we have
+results from prior experiments to set a scale for the total flux.
+It is also statistically desirable; Bayes factors tend to be robust
+to specification of priors for parameters common to models being compared.
+
+We adopt independent priors for the total flux and the associated fraction.
+If their prior densities are $g(F_T)$ and $h(f)$, then the implied
+joint prior density for $(F_0,F_A)$ is
+\be
+\pi(F_0, F_A) =
+  \frac{g(F_0+F_A) h\left(\frac{F_A}{F_0+F_A}\right)}{F_0+F_A},
+\label{FF-prior}
+\ee
+where the denominator is from the Jacobian of the transformation between
+parameterizations.  In general, an independent prior for $F_T$ and $f$
+corresponds to a dependent prior for $F_0$ and $F_A$.
+
+For the calculations below, we adopt exponential prior with scale $s$ for
+$F_T$, and a beta prior for $f$ with shape parameters $(a,b)$, so
+\be
+g(F_T) = \frac{1}{s}e^{-F_T/s}
+\quad\text{and}\quad
+h(f) = \frac{1}{B(a,b)} f^{a-1}(1-f)^{b-1},
+\label{exp-beta}
+\ee
+where $B(a,b)$ is the beta function.  We set the hyperparameters $(s,a,b)$
+as follows.
+
+We take $s = 0.01\times 4\pi$ km$^{-1}$ y$^{-1}$ for all models.  This scale
+is compatible with flux estimates from AGASA and HiRes.  The likelihood
+functions for $F_T$ from those experiments are formally different from
+exponentials (they are more concentrated away from zero), but since this
+prior is common to all models, and since the PAO data are very informative
+about the total flux, our results are very robust to its detailed
+specification.
+
+For the beta prior for $f$, our default choice is $a=b=1$, which corresponds
+to a uniform prior on $[0,1]$.  We also repeat some computations using $b=5$
+to investigate the sensitivity of Bayes factors to this prior.  This case
+skews the prior downward, increasing the probability that $f$ is close to 0.
+
+%..............................................................................
+\subsection{Cosmic ray mark distributions}
+
+Given the fluxes, we model cosmic ray arrival times with a superposition of
+homogeneous Poisson point processes from each component.  Besides its
+arrival time, each cosmic ray has a label associated with it, identifying
+its source component. Let $\tlabel_i$ be an integer-valued latent label for
+UHECR $i$, specifying its source ($\tlabel_i = 0$ for the background, or
+$k \ge 1$ for AGN $k$).  Since a superposition of Poisson processes is a
+Poisson process, we may consider the arrival times to come from a total
+event rate process, and the labels to come from a categorical mark
+distribution with probability mass function
+\be
+P(\lambda_i=k|F_0,\Fvec) = \frac{F_k}{\sum_{j=0}^{N_A} F_j}.
+\label{label-pmf}
+\ee
+In the absence of magnetic deflection, the labels could be replaced by
+source directions (with background source directions assigned
+isotropically), and the process could be considered to be Poisson in time
+with a directional mark distribution.  But magnetic deflection requires a
+more complex setup.
+
+Our full framework also assigns energies as marks for each cosmic ray, drawn
+from a distribution describing the cosmic ray spectrum.  The energies would
+be important in an analysis that seeks to infer the cutoff energy
+distinguishing local UHECRs rays from lower-energy cosmic rays (i.e., the
+GZK cutoff).  Although the PAO-10 catalog includes event energies, the PAO
+team has already made an energy cut, and in the absence of lower-energy
+data, we cannot usefully infer a cutoff.  Thus in the analysis presented
+here, we ignore the energy mark distribution.  
+(For models with more complex
+luminosity functions and more distant sources, the energies would play a
+role in accounting for the suppression of flux from distant sources due to
+interactions with cosmic backgrounds.)
+
+%..............................................................................
+\subsection{Cosmic ray deflection}
+\label{sec:dflxn}
+
+After leaving a source, UHECRs will have their paths deflected as they
+traverse galactic and intergalactic magnetic fields.  The Galactic field is
+partially measured and is known to have both a turbulent component (varying
+over length scales below $\sim 1$~kpc) and a regular component (coherent
+over kpc scales and largely associated with spiral arms), with typical field
+strengths $\sim 1~\mu$G.  The magnetic fields of other galaxies are at
+best crudely measured and believed to be similar to the Galactic field. The
+much smaller fields in intergalactic space are only weakly constrained (in
+fact, cosmic rays might provide useful additional constraints); the typical
+field strength is probably not larger than $\sim 10^{-9}$~G except within
+galaxy clusters.
+
+A number of investigators have modeled cosmic ray
+propagation in the Galaxy, or in intergalactic space, using physical models
+based on existing field measurements (recent examples include
+\cite{HRM02-Lens,HMR02,D+05-CRDflxn,NM10-CRDflxn,AKP10-CRDflxn,J+10-CRSources}
+; see \cite{Sigl12} for an overview).  Roughly speaking, there are two regimes
+of deflection behavior, described here in the small-deflection limit
+\cite{HMR02}.  As a cosmic ray with energy $E$ and atomic number $Z$ traverses
+a distance $L$ spanning a regular magnetic (vector) field $\bm{B}$, it is
+deflected by an angle
+\be
+\delta \approx
+  6.4^\circ\; Z \left(\frac{E}{50~\mbox{EeV}}\right)^{-1}
+  \left| \int_L \frac{d\bm{s}}{3~\mbox{kpc}} \times 
+          \frac{\bm{B}}{2~\mu\mbox{G}} \right|,
+\label{dflxn-reg}
+\ee
+where $\bm{s}$ (a vector) is an element of displacement along the
+trajectory; the field and length scales are typical for the Galaxy.  If
+instead it traverses a region with a turbulent structure, with the field
+coherence length $\ell\ll L$, then the deflection will be stochastic; its
+probability distribution has zero mean, and root-mean-square (RMS) angular
+scale
+\mnote{Fixed intergal.\ scale}
+\ba
+\delta_{\rm rms}
+  &\approx& 1.2^\circ\; Z \left(\frac{E}{50~\mbox{EeV}}\right)^{-1}
+    \left(\frac{B_{\rm rms}}{4~\mu\mbox{G}}\right)
+    \left(\frac{L}{3~\mbox{kpc}}\right)^{1/2}
+    \left(\frac{\ell}{50~\mbox{pc}}\right)^{1/2}\\
+  &\approx& 2.3^\circ\; Z \left(\frac{E}{50~\mbox{EeV}}\right)^{-1}
+    \left(\frac{B_{\rm rms}}{1~\mbox{nG}}\right)
+    \left(\frac{L}{10~\mbox{Mpc}}\right)^{1/2}
+    \left(\frac{\ell}{1~\mbox{Mpc}}\right)^{1/2},\nonumber
+\label{dflxn-turb}
+\ea
+where $B_{\rm rms}$ is the RMS field strength along the path, and quantities
+are scaled to typical galactic and intergalactic scales on the first and
+second lines, respectively.
+
+For a detected cosmic ray, the energy is measured fairly accurately, but
+other quantities appearing in the deflection formulae may be largely
+unknown.  As noted above, there is significant uncertainty in the magnitudes
+of cosmic magnetic fields, particularly for turbulent structures.  Turbulent
+length scales are poorly known.  Finally, the composition (distribution of
+atomic numbers) of UHECRs is not known.  Low energy cosmic rays are known to
+be mainly protons and light nuclei, but the proportion of heavy nuclei (with
+$Z$ up to 26, corresponding to iron nuclei, the most massive stable nuclei)
+increases with energy up to about $10^{15}$~eV.  At higher energies,
+inferring the cosmic ray composition is very challenging, requiring both
+detailed measurement of air shower properties, and theoretical modeling
+of the $Z$ dependence of hadronic interactions at energies far beyond
+those probed by accelerators.  Measurements and modeling from HiRes
+indicate light nuclei are predominant again at $\approx 1$~EeV and remain
+so at least to $\approx 40$~EeV \cite{HiRes10-Final-arxiv}.
+In contrast, recent PAO measurements indicate a transition from light
+to heavy nuclei over the range $\approx 3$--30~EeV
+\cite{PAO10-Composition,PAO12-Composition}.
+(The discrepancy is not yet explained.)
+For heavy nuclei, the deflection scales in both the regular and
+turbulent deflection regimes can be large, $\sim 1$~rad. Some
+investigators have suggested that many or most UHECRs may be heavy
+nuclei originating from the nearest AGN, Cen~A, so strongly deflected
+that they come from directions across the whole southern sky (e.g.,
+\cite{B+09-CenA,GBdS10-CenA,BdS12-CenA}).
+
+%\enote{All the PAO composition papers I found ignore the conflict with
+%HiRes, except for a brief footnote in arxiv:1106.3048 (now in JCAP), a PAO
+%paper on the Cen~A hypothesis.}
+
+
+%It is difficult to measure the composition of UHECRs.  Lower-energy cosmic
+%rays are mostly protons, but PAO sees suggestive evidence that there may be
+%heavier nuclei among UHECRs \cite{PAO10-Composition,PAO12-Composition}.
+
+In light of these uncertainties and the relative sparsity of UHECRs,
+we use simple phenomenological models for magnetic deflection.  
+In the simplest ``buckshot'' model, each cosmic ray from a particular source
+experiences a deflection that is conditionally independent of the deflection
+of other rays from that source, given a parameter, $\kappa$, describing the
+distribution of deflections.  We have also devised a more
+complex ``radiant'' model that allows cosmic rays assigned to the same
+source to have correlated deflections, with the correlation representing
+a partially shared deflection history.  For the analyses reported here, we
+use the buckshot model; we describe the radiant model further in
+\S~\ref{sec:summary}.
+
+The buckshot deflection model adopts a Fisher distribution for the
+deflection angles.  The model has a single parameter, $\kappa$, the
+concentration parameter for the Fisher distribution.  The probability
+density for observing a cosmic ray from direction $\tdrxn$ if it is assigned
+to source $k$ with direction $\hdrxn_k$ is then
+\be
+\rho_k(\tdrxn|\kappa)
+  = \frac{\kappa}{4\pi\sinh(\kappa)}\exp(\kappa\tdrxn\cdot\hdrxn_k).
+\label{rho-def}
+\ee
+With this deflection distribution, when a cosmic ray is generated from an
+isotropic background population, its deflected direction still has an
+isotropic distribution.  Accordingly,
+\be
+\rho_0(\tdrxn|\kappa) =  \frac{1}{4\pi}.
+\label{rho-iso}
+\ee
+
+The $\kappa$ parameter is convenient for computation, but an angular scale
+is more convenient for interpretation.  The contour of the Fisher density
+bounding a region containing probability $P$ is azimuthally symmetric
+with angular radius $\theta$ satisfying
+\be
+\int_{\Omega}d \tdrxn \, \rho_k(\tdrxn|\kappa)= 
+  \frac{1-e^{-\kappa[1-\cos(\theta)]}}{1-e^{-2\kappa}}=P,
+\label{kappa-theta}
+\ee
+where $\Omega$ denotes the cone of solid angle subtended by the contour. In
+plots showing $\kappa$-dependent results, we frequently provide an angular
+scale axis, using (\ref{kappa-theta}) with $P=0.683$, in analogy to the
+``$1\sigma$'' region of a normal distribution.\footnote{In the $\kappa\gg 1$
+limit, the Fisher density becomes an uncorrelated bivariate normal with
+respect to locally cartesian arc length coordinates about the mode on the
+unit sphere.  The standard deviation of this normal distribution, $\theta$,
+satisfies equation~(\ref{kappa-theta}) with $P \approx 0.683$; for $\kappa\gg
+1$ this implies $\theta^2 \approx 2.30/\kappa$, or
+$\theta \approx 86.9^\circ/\kappa^{1/2}$.}
+
+% From full formula:
+% def c1(k): return -log(1-(1-exp(-2*k))*.683)/k
+% def ang(k):  return arccos(1-c1(k))*180/pi
+% kappa  sig
+% .5     97.5 deg
+% 1      83.8
+% 10     27.7
+% 100    8.69
+% 1000   2.75
+
+Note that, astrophysically, $\kappa$ has a nontrivial interpretation.  If
+all UHECRs are the same nuclear species (e.g., all protons), then $\kappa$
+depends solely on the magnetic field history experienced by cosmic rays as
+they propagate to Earth.  If UHECRs are of unknown or mixed chemical
+composition, then $\kappa$ conflates magnetic field history and composition.
+In a more complicated model, there could be a distribution for the values
+of $\kappa$ assigned to UHECRs (accounting for different compositions and
+magnetic field histories); the distribution could depend on source direction
+(accounting for known magnetic field structure in the Galaxy and perhaps in
+intergalactic space) and on source distance (related to the path length in
+intergalactic space).
+
+When estimating $\kappa$ or marginalizing over it, we adopt a log-flat prior
+density for $\kappa\in[1,1000]$,
+\be
+p(\kappa) = \frac{1}{\log 1000}\,\frac{1}{\kappa}, \text{ for } 1\leq\kappa\leq1000.
+\label{k-prior}
+\ee
+The lower limit corresponds to large angular deflection scales $\sim 1$~rad,
+such as might be experienced by iron nuclei.  The upper limit corresponds
+to small angular deflection scales $\sim 1^\circ$, such as might be
+experienced by protons with $E\sim 100$~EeV.
+
+
+%..............................................................................
+\subsection{Cosmic ray detection and measurement}
+\label{sec:dtxn}
+
+Even though the arrival rate of UHECRs into a unit volume is constant in
+time in our model, the expected number per unit time detected from a given
+direction will vary as the rotation of the Earth changes the observatory's
+projected area toward that direction, as noted above.  As a result, the
+Poisson intensity function for detectable cosmic rays varies in
+time for each source.
+
+Recall that the likelihood function for an inhomogeneous Poisson
+point process in time with rate (intensity function) $r(t)$ has the form
+\be
+\exp(-N_{\rm exp}) \prod_i r(t_i) \delta t,
+\label{simple-ppp-like}
+\ee
+where the events are detected at times $t_i$ in detection intervals of size
+$\delta t$, and $N_{\rm exp}$ is the total expected number in the observing
+interval (the integral of the rate over the entire observing interval).
+The likelihood function for the cosmic ray data has a similar form, but
+with adjustments due to the mark distribution and measurement errors.
+
+If the label and arrival direction for detected cosmic ray $i$ were known, the
+factor in the likelihood function associated with that cosmic ray would be
+$F_k A_p(t_i, \tdrxn_i) \delta t$, where $k=\lambda_i$.
+In reality, both the label and the arrival direction are uncertain; the PAO
+analysis pipeline produces a likelihood function for the direction to the
+cosmic ray, $\ell_i(\tdrxn_i)$; see equation~(\ref{ell-def}).
+
+Introducing the uncertain direction as a nuisance parameter, with a prior
+denoted by $\rho_k(\tdrxn_i|\kappa)$, the likelihood factor for cosmic ray
+$i$ when assigned to source $k$ may be calculated by marginalizing; it may
+be written as $F_k f_{k,i}\delta t$, with
+\be
+f_{k,i}(\kappa) =
+  \int d\omega_i \ell_i\left(\omega_i\right) A_p(t_i,\omega_i)
+  \rho_k(\omega_i|\kappa).
+\label{f-def}
+\ee
+The cosmic ray direction measurement uncertainty is relatively small ($\sim
+1^\circ$) compared to the scale over which the area varies, so we can
+approximate $f_{k,i}$ as
+\ba
+f_{k,i}(\kappa)
+  \approx A_i\cos(\theta_i)
+  \int  \ell_i(\omega_i)\rho_k(\omega_i|\kappa) d\omega_i,
+\ea
+where $\theta_i$ denotes the zenith angle of UHECR $i$ (reported by PAO-10)
+and $A_i = A(t_i)$ is the area of the observatory at the arrival time of
+UHECR $i$.  The integral can be computed analytically;
+\ba
+\int d\omega_i \ell_i(\omega_i) \rho_k(\omega_i|\kappa) =
+\begin{cases}
+\frac{\kappa_c\kappa}{4\pi\sinh(\kappa_c)\sinh(\kappa)}
+  \frac{\sinh(|\kappa_c n_i+\kappa\hdrxn_k|)}{|\kappa_c n_i+\kappa\hdrxn_k|}
+  & \mbox{if $k\geq 1$},\\
+\frac{1}{4\pi} & \mbox{if $k=0$}.
+\end{cases}
+\label{f-approx}
+\ea
+The total event rate for cosmic rays resembling detected ray $i$ combines
+the contributions from each potential source, i.e.,
+$r(t_i) = \sum_k F_k f_{k,i}(\kappa)$.
+
+To calculate the expected number factor in the likelihood, we must account
+for the observatory's exposure map.  The effective exposure given to cosmic
+rays from source $k$ throughout the time of the survey depends, not just on
+the direction to the source, but also on the deflection distribution,
+$\rho_k$ (and thus on $\kappa$), since rays from that source will not arrive
+precisely from the source direction.  The exposure factor for source $k$ is
+\be
+\epsilon_k(\kappa) =
+  \int d\tdrxn \rho_k(\tdrxn|\kappa) \epsilon(\tdrxn).
+\label{eps-def}
+\ee
+Note that $\epsilon_k$ has units of area $\times$ time, and for the
+isotropic background component ($k=0$), $\epsilon_0(\kappa)$ is a constant
+equal to the sky-averaged exposure (in the notation of
+Supplementary Appendix~\ref{app:expo}, $\epsilon_0 = \alpha_T/4\pi$).
+To find the total expected number of detected cosmic rays we sum over
+sources: $N_{\rm exp} = \sum_{k \ge 0} F_k \epsilon_k(\kappa)$.
+
+An implication of the source-dependent exposure is that the prior probability
+mass function for the label of a {\em detected} cosmic ray is not given by
+(\ref{label-pmf}); the terms must be weighted according to the source
+exposures.  The result is
+\be
+P(\lambda_i=k|F_0,\Fvec,\kappa) =
+  \frac{F_k\epsilon_k(\kappa)}{\sum_{j=0}^{N_A} F_j\epsilon_j(\kappa)}.
+\label{label-eps-pmf}
+\ee
+
+We now have the ingredients needed to evaluate
+equation~(\ref{simple-ppp-like}), generalized to include the cosmic ray
+marks (directions and labels) and their uncertainties.  The resulting
+likelihood function is
+\be
+\like(F_0,\Fvec,\kappa)
+  = \exp\left(-\sum_k F_k\epsilon_k\right)
+      \prod_i \left( \sum_k f_{k,i} F_k \right).
+\label{like-poisson}
+\ee
+The product-of-sums factor resembles the likelihood for a finite mixture
+model (FMM), if we identify the $f_{k,i}$ factors as the component
+densities, and the $F_k$ factors as the mixing weights.  A common technique
+for computing with mixture models is to rewrite the likelihood function as a
+sum-of-products by introducing latent label parameters identifying which
+component each datum may be assigned to.  In Supplementary
+Appendix~\ref{app:like} we exploit this analogy to show that the
+likelihood function can be rewritten as a sum over latent assignments of
+cosmic rays to sources,
+\be
+\like(F_0,\Fvec,\kappa)
+  = \sum_{\lambda} \left(\prod_k F_k^{m_k(\lambda)}e^{-F_k\epsilon_k}\right)
+    \prod_i f_{\lambda_i,i},
+\label{like-assoc}
+\ee
+where $\lambda = \{\lambda_i\}$ and $\sum_\lambda$ denotes an
+$N_C$-dimensional sum over all possible assignments of cosmic rays to
+sources, and the multiplicity $m_k(\lambda)$ is the number of UHECRs
+assigned to source $k$ according to $\lambda$.  We suppress the $\kappa$
+dependence of $\epsilon_k(\kappa)$ and $f_{k,i}(\kappa)$ here and elsewhere
+to simplify expressions.  Note that the $F_k$ dependence (for a given
+$\lambda$) is of the same form as a gamma distribution.
+
+Rewriting the previous expression with $(F_T,f)$ in place of $(F_0,F_A)$,
+and using $F_k = w_kF_A = f w_k F_T$ (for $k\ge 1$), we can rewrite
+$\like(F_0,\Fvec,\kappa)$ as
+\ba
+\like(f,F_T,\kappa) 
+  &=& \sum_\lambda (1-f)^{m_0(\lambda)} f^{N_C-m_0(\lambda)} F_T^{N_C}\\
+  && \times e^{-F_T\left[(1-f)\epsilon_0+f\sum_{k\geq 1} w_k\epsilon_k \right]}
+     \prod_{k\geq 1} w_k^{m_k(\lambda)} \prod_i f_{\lambda_i,i}.\nonumber
+\label{eq:lik}
+\ea
+
+For computations it will be helpful to have the likelihood function
+conditional on the label assignments,
+\be
+P(D|\lambda,F_0,\Fvec,\kappa)
+  = \exp\left(-\sum_k F_k\epsilon_k\right)
+    \left[ \sum_k F_k\epsilon_k \right]^{N_C}
+    \prod_i \frac{f_{\lambda_i,i}}{\epsilon_{\lambda_i}}.
+\label{eq:lik-lambda}
+\ee
+where $k$ runs over the host labels (from 0 to $N_A$), and $i$ runs over the
+UHECR labels (from 1 to $N_C$).  We can recover the likelihood for $F_0$,
+$\Fvec$, and $\kappa$ by multiplying by the prior for $\lambda$ from
+equation~(\ref{label-eps-pmf}) and marginalizing, giving
+equation~(\ref{like-assoc}).
+
+
+%..............................................................................
+\subsection{Estimating $\kappa$}
+
+To estimate the deflection parameter, $\kappa$, we need the marginal
+likelihood $\like_m(\kappa) = P(D|\kappa) = \int dF_T\int df
+P(D,F_T,f|\kappa)$.  The integrand is the product of equation~(\ref{eq:lik})
+and the flux priors.  Using the exponential and beta priors described above,
+we have that the marginal likelihood for $\kappa$ is
+\ba
+\like_m(\kappa)
+  &=& \sum_\lambda \frac{\Gamma(N_C+1)\prod_{k\geq 1}w_k^{m_k(\lambda)}
+      \prod_i f_{\lambda_i,i}}{s B(a,b)}\nonumber\\
+  &&  \times\int_0^1
+      \frac{f^{N_C-m_0(\lambda)+a-1}(1-f)^{m_0(\lambda)+b-1}}
+           {\left[\frac{1}{s} + (1-f)\epsilon_o +
+                f\sum_{k\geq 1}w_k\epsilon_k\right]^{N_C+1}}df.
+\label{eq:marg}
+\ea
+Computing $\like_m(\kappa)$ requires summing over all possible values of
+$\lambda$ which is intractable in practice.  In Supplementary
+Appendix~\ref{sec:Chib}, we describe how to use Chib's method
+\cite{MR1379473} to calculate this marginal likelihood.
+
+%..............................................................................
+\subsection{Model Comparison}
+
+% $\like_m = \int d\kappa \pi(\kappa)\like_m(\kappa)$
+
+We use Bayes factors (ratios of marginal likelihoods) to compare models both
+conditioned on $\kappa$ (using marginal likelihood functions
+$\like_m(\kappa)$), and after marginalizing over $\kappa$ (using the log-flat
+prior of equation~(\ref{k-prior}), and numerical quadrature over
+$\kappa$).
+
+We consider three models.  The null model, $M_0$, assumes that all the
+UHECRs come from the isotropic background source population; recall that it
+has no $\kappa$ dependence (see equation~(\ref{rho-iso})).  Model $M_1$
+allows the UHECRs to come from any of the 17 AGNs in the catalog or from the
+isotropic background.  We also consider another model, $M_2$, in which the
+UHECRs may come from the isotropic background or either of the two closest
+AGNs, Cen~A (NGC~5128) and NGC~4945; this model is motivated in part by
+recent suggestions that most UHECRs may be heavy nuclei from a single nearby
+source, as cited above.  
+(We also briefly explore a similarly-motivated fourth
+model that assigns all UHECRs to Cen~A; as noted below, this model
+is tenable only for $\kappa\approx 0$.)  In order to compare models $M_1$
+and $M_2$ to the null model, we compute the Bayes factors:
+\be
+\mbox{BF}_{10}(\kappa) = \frac{\like_{m,1}(\kappa)}{\like_{m,0}},
+\qquad
+\mbox{ BF}_{20}(\kappa) = \frac{\like_{m,2}(\kappa)}{\like_{m,0}}
+\label{BF10+20}
+\ee
+where $\like_{m,0}(\kappa)$ is the marginal likelihood for the null
+model, conditioned on $\kappa$ (similar equations hold for models
+that marginalize over $\kappa$).  The value of $\like_{m,0}(\kappa)$
+can be found from equation~(\ref{like-assoc}), noting that for the
+null model, there is only one term in the sum over $\lambda$
+(with all $\lambda_i = 0$, since the only allowed value of $k$ is $k=0$).
+Marginalizing this term over $F_T$ (equal to $F_0$ in this case) gives
+\be
+\like_{m,0}(\kappa) =
+  \frac{1}{s}
+  \left(\frac{s}{s\epsilon_0+1}\right)^{N_C+1}
+  \Gamma(N_C+1) \times \prod_i f_{0,i}.
+\ee
+
+%..............................................................................
+\subsection{Computational techniques}
+\label{subsec:compn}
+
+The principal obstacle to computing with this framework is the combinatorial
+explosion in the number of possible associations as the sizes of the
+candidate source population and the cosmic ray sample grow.  For small
+amounts of magnetic deflection, the vast majority of candidate associations
+are improbable (they associate well-separated objects with each other). But
+there is evidence that UHECRs may be massive (and thus highly charged)
+nuclei, which would undergo significant deflection. To probe the full
+variety of astrophysically interesting models requires techniques that can
+handle both the small- and large-deflection regimes, for catalog sizes
+corresponding to current and forthcoming catalogs from PAO.
+
+For parameter estimation within a particular model, we have developed a
+Markov chain Monte Carlo (MCMC) algorithm that draws samples of the
+parameters $f$, $F_T$, and $\lambda$ from their joint posterior
+distribution.  The algorithm takes advantage of two features of the models
+described above.  First, by introducing latent labels, $\lambda$, we could
+write the likelihood function in a sum-of-products form,
+equation~(\ref{like-assoc}), with factors that depend on the fluxes
+$F_k$ in the manner of a gamma distribution.  Second, the forms of the
+likelihood and priors are conjugate for $F_T$ and the labels, so we can find
+closed-form expressions for their conditional distributions.  These features
+enable us to use Gibbs sampling techniques well known in mixture modeling
+for sampling the $F_T$ and $\lambda$ parameters.  We handle the $f$
+parameter using a random walk Metropolis algorithm, so our overall algorithm
+is a Metropolis-within-Gibbs algorithm.  Supplementary
+Appendix~\ref{app:compn} provides details on its implementation.
+
+We treat the deflection parameter, $\kappa$, specially, considering
+a logarithmically-spaced grid of values that we condition on.  We
+did this so that we could explore the $\kappa$ dependence more
+thoroughly than would be possible with posterior sampling of $\kappa$.
+Of course, our Metropolis-within-Gibbs algorithm could be supplemented
+with $\kappa$ proposals to enable sampling of the full posterior.
+
+Finally, using Bayes factors to compare rival models requires computing
+marginal likelihoods, which are not direct outputs of MCMC algorithms.
+Using a simplified version of our model, and modest-sized simulated
+datasets, we explored several approaches for marginal likelihood computation
+in a regime where we could compute the correct result via direct summation
+over all feasible associations.  We explored the harmonic mean estimator
+(HME), Chib's method, and importance sampling algorithms.  The HME
+performed poorly, often apparently converging to an incorrect result (such
+behavior is not unexpected; see \cite{WS12-HMBad}).  Importance sampling
+proved inefficient.  Chib's method was both accurate and efficient in these
+trial calculations, and became our choice for the final implementation.
+Supplementary Appendix~\ref{app:compn} provides details.

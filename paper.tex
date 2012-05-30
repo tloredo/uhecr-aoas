@@ -1,0 +1,296 @@
+\documentclass[dvips,aoas,preprint]{imsart}
+%\documentclass[dvips,aoas]{imsart}
+
+\RequirePackage[OT1]{fontenc}
+\RequirePackage{amsthm,amsmath}
+\RequirePackage[numbers]{natbib}
+\RequirePackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+
+\usepackage{amssymb,amsbsy}
+\usepackage{mathtools}  % for \coloneqq
+%\usepackage[dvips]{graphics}
+\usepackage{graphicx}
+\usepackage{rotating}  % for sidewaystable
+
+% Packages that aren't standard for AOAS:
+%\usepackage{subfig} 
+
+% Watermarking:
+%\usepackage{draftwatermark}
+%\SetWatermarkText{DRAFT}
+%\SetWatermarkLightness{0.9}
+%\SetWatermarkScale{5}  % default is 1.2
+
+% To typeset latex command names:
+\newcommand\cmdname[1]{{\tt \textbackslash#1}}
+\chardef\bslash=`\_
+
+%\usepackage{amsthm,amsmath,natbib}
+%\RequirePackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+
+% provide arXiv number if available:
+%\arxiv{math.PR/0000000}
+
+%===============================================================================
+% put your definitions there:
+\startlocaldefs
+
+% Macro for an "editorial note"; uncomment the 2nd definition to
+% produce a version without notes (put it in main doc if desired).
+
+
+
+
+\newcommand\enote[1]{{$\bullet\bullet\bullet$}{\sl [#1]}{$\bullet\bullet\bullet$}}
+
+%\renewcommand\enote[1]{\relax}
+
+
+
+
+
+% Marginal note (just a redef of \marginpar or \marginparodd).
+% Uncomment the 2nd definition to produce a version without notes (put it
+% in main doc if desired).
+% Could use \footnotesize for a bigger font.
+% The \hspace enables hyphenation of the 1st word.
+\setlength{\marginparwidth}{.85in}
+\newcommand\mnote[1]{\-\marginpar[\raggedleft\scriptsize\hspace*{0pt}#1]%
+{\raggedright\scriptsize\hspace*{0pt}#1}}
+%\renewcommand\mnote[1]{\relax}
+
+\newcommand{\txw}{\textwidth}
+
+\renewcommand{\arraystretch}{1.2}
+
+
+\newcommand{\bm}[1]{\mbox{\boldmath{$#1$}}}
+
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\ba}{\begin{eqnarray}}
+\newcommand{\ea}{\end{eqnarray}}
+\newcommand{\barr}{\begin{array}}
+\newcommand{\earr}{\end{array}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+
+\newcommand{\like}{{\cal L}}
+\newcommand{\pval}{$p$-value}
+\newcommand{\Eth}{E_{\rm th}}
+\newcommand{\Dmax}{D_{\rm max}}
+\newcommand{\Nsrc}{N_S}
+
+% Coincidence model macros; t* = target, h* = host:
+\newcommand{\tdrxn}{\omega}  % target (CR) direction
+\newcommand{\hdrxn}{\varpi}  % host (AGN) direction
+\newcommand{\expo}{\epsilon}  % exposure
+\newcommand{\tlabel}{\lambda}  % target label
+\newcommand{\Fvec}{\bm{F}}  % host fluxes
+
+\newcommand{\D}{\overline{\mbox{D}}}
+
+\newcommand{\simless}{\mathbin{\lower 3pt\hbox
+   {$\rlap{\raise 5pt\hbox{$\char'074$}}\mathchar"7218$}}}
+\newcommand{\simgreat}{\mathbin{\lower 3pt\hbox
+   {$\rlap{\raise 5pt\hbox{$\char'076$}}\mathchar"7218$}}}
+\newcommand{\gta}{\simgreat}
+\newcommand{\lta}{\simless}
+\newcommand\msun{{\rm M}_\odot}
+\endlocaldefs
+
+%===============================================================================
+\begin{document}
+
+%===============================================================================
+\begin{frontmatter}
+
+% "Title of the paper"
+\title{Multilevel Bayesian Framework for Modeling the Production,
+Propagation and Detection of Ultra High Energy Cosmic Rays}
+
+% For footnote indicating draft status:
+% END OF TITLE TEXT\protect\thanksref{DRAFT}}
+%\thankstext{DRAFT}{This is an description of work in progress, prepared for
+%participants in the 2011 workshop, {\em Case Studies in Bayesian Statistics and
+%Machine Learning}.  {\bf PLEASE DO NOT CIRCULATE!}}
+
+% indicate corresponding author with \corref{}
+% \author{\fnms{John} \snm{Smith}\corref{}\ead[label=e1]{smith@foo.com}\thanksref{t1}}
+% \thankstext{t1}{Thanks to somebody}
+% \address{line 1\\ line 2\\ printead{e1}}
+% \affiliation{Some University}
+
+\author{\fnms{Kunlaya} \snm{Soiaporn}\corref{}\ead[label=e1]{ks354@cornell.edu}},
+\address{\printead{e1}}
+\author{\fnms{Thomas} \snm{Loredo}\ead[label=e2]{loredo@astro.cornell.edu}},
+\address{\printead{e2}}
+\author{\fnms{David} \snm{Chernoff}\ead[label=e3]{cheroff@astro.cornell.edu}},
+\address{\printead{e3}}
+\author{\fnms{David} \snm{Ruppert}\ead[label=e4]{dr24@cornell.edu}}
+\address{\printead{e4}}
+\and
+\author{\fnms{Ira} \snm{Wasserman}\ead[label=e5]{ira@astro.cornell.edu}}
+\address{\printead{e5}}
+\affiliation{Cornell University}
+
+
+\runauthor{Soiaporn, et al.}
+\runtitle{Multilevel Models for Cosmic Rays}
+
+\begin{abstract}
+Cosmic rays are atomic nuclei with velocities close to the speed of light.
+Ultra-high energy cosmic rays (UHECRs) are approximately ten million times
+more energetic than the most extreme particles produced at the Large Hadron
+Collider and likely originate from nearby extragalactic sources. Important
+astrophysical questions include: what phenomenon accelerates particles to such
+large energies, which astronomical objects host the accelerators, and what
+sorts of nuclei end up being energized? We develop a multilevel Bayesian
+framework for assessing evidence for association of UHECRs and candidate source
+populations that has four levels:
+\mnote{Revised \& extended abstract}
+(1) a source property description level, including specification of a
+candidate source population and the distribution of cosmic ray
+intensities among sources;
+(2) a cosmic ray production level, using a marked Poisson point process
+to model latent properties (arrival times and energies) of cosmic rays;
+(3) a propagation level, modeling deflection of cosmic ray trajectories by
+cosmic magnetic fields;
+(4) a detection and measurement level, accounting for detector efficiency
+and exposure, and measurement errors in arrival directions and energies.
+Our framework can flexibly accomodate astrophysical components anywhere on
+a spectrum from simplicity to great complexity and realism.  
+We demonstrate the framework using simple models similar to those
+adopted in previous studies, but our results suggest more complex models
+are likely necessary (we will pursue such models in future work).
+
+The principal obstacle to computing with this framework is the
+combinatorial explosion in the number of possible associations as the
+sizes of the candidate source population and the UHECR sample grow.  We
+present a Markov chain Monte Carlo algorithm for estimating the
+parameters and computing, via Chib's method, the marginal likelihoods
+used in model comparison.  We apply the algorithm to the observations of
+69 UHECRs observed by Pierre Auger Observatory (PAO) during the years
+2004--2009, using a volume-complete catalog of 17 nearby active galactic
+nuclei as a candidate host population.
+The reported data are incomplete; an early portion of the data
+(``Period~1'') was used to set an energy cut maximizing a measure of
+anisotropy in that data; only data for cosmic rays with energies above
+that cut is reported, in Period~1 (14 events) and subsequently.  Also,
+measurement errors are approximately summarized.  These factors are
+problematic for independent analyses of PAO data.  Within the context of
+``standard candle'' source models (all sources with the same isotropic
+cosmic ray emission rate), there is no significant evidence favoring
+association of UHECRs with nearby AGN vs.\ attributing them to sources
+drawn from an isotropic background distribution, when we analyze the
+untuned data subsequent to Period~1; the highest-probability
+associations are with the two nearest AGN, Centaurus~A and its neighbor,
+NGC~4945.  If the association model is adopted, the fraction of UHECRs
+that may be associated is likely nonzero but is constrained to be well
+below 50\%.  Relatively small magnetic deflection angular scales of
+$\approx 3^\circ$ to $20^\circ$ are favored; models that assign a large
+fraction of UHECRs to a single nearby source are ruled out unless very
+large deflection scales are specified a priori, and even then they are
+disfavored.  However, including the Period~1 data alters the conclusions
+significantly, and a simulation study supports the idea that the
+Period~1 data are anomalous, presumably due to the tuning.  Accurate and
+optimal analysis of future data will likely require more complete
+disclosure of the data.
+\end{abstract}
+
+
+%\begin{keyword}[class=AMS]
+%\kwd[Primary ]{}
+%\kwd{}
+%\kwd[; secondary ]{}
+%\end{keyword}
+
+\begin{keyword}
+\kwd{Multilevel modeling}
+\kwd{Hierarchical Bayes}
+\kwd{Astrostatistics}
+\kwd{Cosmic rays}
+\kwd{Directional data}
+\kwd{Coincidence assessment}
+\kwd{Bayes factors}
+\end{keyword}
+
+\end{frontmatter}
+
+%===============================================================================
+
+%\enote{Editorial notes appear like this, using the \cmdname{enote} macro
+%defined in paper.tex.  For issues not resolved but being deferred, leave the
+%\cmdname{enote} in place, but uncomment the \cmdname{renewcommand}
+%redefinition of \cmdname{enote} in paper.tex to hide them; we'll deal with
+%them later.}
+
+\enote{Added keywords (bottom p~1).}
+
+\input{intro}
+
+\input{data}
+
+\input{modeling}
+
+\input{results}
+
+\input{checking}
+
+\input{discussion}
+
+\appendix
+
+\input{app-exposure}
+
+\input{app-like}
+
+\input{app-computation}
+
+\input{app-CenA}
+
+\input{app-comparison}
+
+\input{app-chgpt}
+
+\section*{Acknowledgements}
+This research was supported by the NSF via grants AST-0908439 and DMS-0805975.
+We are grateful to Paul Sommers for helpful conversations about the
+PAO instrumentation and data reduction and analysis process.
+
+% Descriptions of online supplements go here:
+
+%\begin{supplement}[id=suppA]
+%  \sname{Supplement A}
+%  \stitle{Title}
+%  \slink[url]{http://lib.stat.cmu.edu/aoas/???/???}
+%  \sdescription{Some text}
+%\end{supplement}
+
+
+\bibliographystyle{plain}
+\newcommand{\apj}{Astrophysical Journal}
+\newcommand{\apjl}{Astrophysical Journal Letters}
+\newcommand{\mnras}{Monthly Notices of the Royal Astronomical Society}
+\newcommand{\jcap}{Journal of Cosmology and Astroparticle Physics}
+
+\bibliography{UHECR}
+
+% AOS,AOAS: If there are supplements please fill:
+%\begin{supplement}[id=suppA]
+%  \sname{Supplement A}
+%  \stitle{Title}
+%  \slink[url]{http://lib.stat.cmu.edu/aoas/???/???}
+%  \sdescription{Some text}
+%\end{supplement}
+
+\end{document}
+
+Chib, S. (1995) Marginal likelihood from the Gibbs Output, JASA, 90,
+1313—1321.
+
+Newton, M. A., and Raftery, A. E. (1994) Approximate Bayesian inference by the
+weighted likelihood bootstrap, JRSS-B, 56, 3-48.
+
+Cook, Gelman, Rubin 2006
+

@@ -1,0 +1,60 @@
+\section{Likelihood factorization}
+\label{app:like}
+
+Consider estimating the probability density function for a sample of $N$
+points $\{x_i\}$ in a Euclidean space using a mixture model built from the
+parameterized kernel density $f(x;\theta)$ with parameters $\theta$
+(typically including at least location and scale parameters).  With the
+number of components in the mixture fixed as $K$, the likelihood function
+for the set of kernel parameters $\{\theta_k\}$ and (normalized) mixing
+weights $\{w_k\}$ is
+\be
+\like(\{w_k\},\{\theta_k\}) = 
+  \prod_{i=1}^N \left[ \sum_{k=1}^K w_k f(x_i;\theta_k) \right].
+\label{like-mix}
+\ee
+The factor associated with a particular datum, $\sum_k w_k f(x_i;\theta_k)$,
+may be interpreted two ways. We may consider it to be the value of a single,
+complex density function that happens to representable as a weighted sum.
+Alternatively, we may consider it to represent a choice of one of the $K$
+components, with probability $w_k$, as the source for the datum, which is
+then drawn from the component density $f(x_i; \theta_k)$.  We can make
+the latter interpretation more explicit by introducing latent labels,
+$\{\lambda_i\}$, with $\lambda_i = k$ denoting assignment of datum $i$
+to component $k$.  To keep track of the probabilities for particular
+assignments in equation~(\ref{like-mix}), we use the labels to
+distinguish the values of $w_k$ associated with the various datum
+factors, by replacing $w_k$ in the $i$th factor with $w_{\lambda_i}$
+(and summing over values of $\lambda_i$ rather than $k$).
+Abbreviating $f(x_i;\theta_k)$ by $f_{k,i}$, we can rewrite
+the likelihood as follows:
+\begin{align}
+\like(\{w_k\},\{\theta_k\})
+  &= \prod_{i=1}^N \left[ \sum_{\lambda_i=1}^{K} w_{\lambda_i}
+          {f}_{\lambda_i, i} \right]\\
+  &= \left(\sum_{\lambda_1=1}^{K} w_{\lambda_1}
+          {f}_{\lambda_1, 1}\right) \times\cdots\times
+     \left(\sum_{\lambda_N=1}^{K} w_{\lambda_N}
+          {f}_{\lambda_N, N}\right)\nonumber\\
+  &= \sum_{\lambda_1=1}^{K} \cdots \sum_{\lambda_N=1}^{K}
+     \prod_{i=1}^N w_{\lambda_i} {f}_{\lambda_i, i}\nonumber\\
+  &= \sum_{\lambda_1\ldots\lambda_N}
+     \left( \prod_k w_k^{m_k(\lambda)}\right)
+    \prod_i {f}_{\lambda_i, i},\nonumber
+\label{product-sum}
+\end{align}
+where for the last line we have collected factors of a particular weight by
+introducing a multiplicity function, $m_k(\lambda)$, counting the number of
+times component index $k$ appears in the list of $N$ labels $\lambda_i$.
+This dual representation is well known in the literature on FMMs
+(see, e.g., \cite{BG88-BayesFMM}).
+
+Turning now to the cosmic ray likelihood function in
+equation~(\ref{like-poisson}), the product factor has the algebraic form of
+a FMM likelihood, with the source fluxes, $F_k$, playing the role of
+mixing weights (but now no longer normalized).  Equation~(\ref{like-assoc})
+then follows by the same manipulations as shown above, with the
+addition of splitting the exponentiated sum in equation~(\ref{like-poisson})
+into separate $e^{-F_k\epsilon_k}$ factors, grouped with with their
+associated $F_k^{m_k(\lambda)}$ factors.  The resulting likelihood
+function essentially corresponds to a Poissonized FMM.

@@ -1,0 +1,106 @@
+\section{Computational Methods}
+\label{app:compn}
+
+
+%..............................................................................
+\subsection{Algorithm for Markov Chain Monte Carlo}
+\label{sec:MCMC}
+
+To draw posterior samples, we perform Metropolis-within-Gibbs sampling on
+parameters $f,F_T$ and $\lambda$.  The full conditionals may be derived from 
+(\ref{eq:lik}) and the $(F_T,f)$ priors.  The conditional for the total flux is
+\be
+F_T|f,\lambda \sim 
+  \text{Gamma}\left(N_C+1,
+    \frac{1}{\frac{1}{s}+(1-f)\epsilon_0+f\sum_{k\geq 1}w_k\epsilon_k}\right),
+\ee
+where $\text{Gamma}(\alpha,s)$ denotes the gamma distribution with shape
+parameter $\alpha$ and scale parameter $s$.  The conditional for the
+cosmic ray labels is a multinomial distribution with probabilities
+\be
+P(\lambda_i|F_T,f,D)
+  \propto \frac{f_{\lambda_i,i}}{\epsilon_{\lambda_i}}\times h_{\lambda_i},
+    \text{ where } h_{j} =
+\begin{cases}(1-f)\epsilon_0 & \text{if $j=0$,}\\
+  fw_j\epsilon_j &\text{if $j\geq 1$.}
+\end{cases}.
+\ee
+Finally, the conditional for the associated fraction is
+\ba \quad
+\left[f|\lambda,F_T,D\right]
+  &\propto& \exp\left\{-F_T\left[(1-f)\epsilon_0+f\sum_{k\geq1}\epsilon_k w_k\right]\right\}\nonumber \\
+  & & \times (1-f)^{m_0(\lambda)+b-1}f^{N_C-m_0(\lambda)+a-1}.
+\ea
+$F_T$ and $\lambda$ are sampled directly from the gamma and multinomial
+distributions.  $f$ is sampled using a random walk Metropolis algorithm with
+Gaussian proposals centered around the current value of $f$.
+The variance of the Gaussian proposal density was tuned so that the
+acceptance rate was about 25$\%$.
+
+%..............................................................................
+\subsection{Marginal Likelihood and Bayes Factor Computation}
+\label{sec:Chib}
+
+Following Chib (1995), we can write the marginal likelihood for $\kappa$ as
+\be
+\like_m(\kappa) = 
+  \frac{P\left(D|F_T^*,f^*,\lambda^*\right)
+        P\left(\lambda^*|F_T^*,f^*\right)P\left(F_T^*\right)
+        P\left(f^*\right)}
+       {P\left(F_T^*,f^*,\lambda^*|D\right)} \qquad ||\kappa,
+\ee
+where the double solidus indicates all the probabilities additionally
+condition on $\kappa$.
+Here $F_T^*, f^*, \lambda^*$ are in principle arbitrary, but in practice
+should correspond to a point with high posterior density.  All the
+terms in the numerator can be computed analytically, using the priors and
+the likelihood from equation~(\ref{eq:lik-lambda}).  The denominator can be
+expressed as
+\be
+P\left(F_T^*,f^*,\lambda^*|D\right) =
+  P(f^*|F_T^*,\lambda^*,D)P(F_T^*|\lambda^*,D)P(\lambda^*|D)
+   \qquad ||\kappa.
+\ee
+The first term on the right hand side is simply the full condition of $f^*$
+evaluated at $F_T^*$ and $\lambda^*$.  Note that the normalizing constant can
+be computed using numerical integration.  The remaining two terms need to be
+estimated using MCMC and can be done as follows:
+\be
+P(F_T^*|\lambda^*,\kappa,D) \approx
+  \frac{1}{G} \sum_{g=1}^G P(F_T^*|f'^{(g)},\lambda^*,\kappa,D),
+\ee
+\be
+P(\lambda^*|\kappa,D) \approx
+  \frac{1}{G} \sum_{g=1}^G P(\lambda^*|f^{(g)},F_T^{(g)},\kappa,D).
+\ee
+Here $G$ denotes the number of iterations.  $f^{(g)}$ and $F_T^{(g)}$ denote
+the sample from the MCMC in iteration $g$.  $f'^{(g)}$ is a sample from a new
+MCMC run using the full conditionals given earlier with $\lambda$ fixed at
+$\lambda^*$ in iteration $g$.
+
+For each $\kappa$ of interest, we first ran 5,000 iterations of Metropolis
+within Gibbs to obtain the high posterior density values, $F_T^*, f^*,
+\lambda^*$.  Then, for each $\kappa$, 3 additional chains of Gibbs sampling
+were run, each with 10,000 iterations.  For subsequent calculations and
+plots, the chains were thinned, so that the lag-one autocorrelation is at
+most 0.15 for all parameters $F_T, f, \lambda$.
+
+We diagnosed convergence by visually inspecting the 
+trace plots from different chains, and by computing the Gelman-Rubin potential 
+scale reduction statistic for chains of samples of continuous parameters
+such as $f$ and $F_T$.  For the discrete $\lambda$ parameters, we computed
+the fraction of time that each cosmic ray is assigned to each source
+during every 10 iterations. The diagnostics were done on these fractions
+similarly to the continuous parameters.
+
+To validate our algorithms (including our convergence criteria) we developed
+an enumerative algorithm that can directly calculate several posterior
+quantities for simplified models of small catalogs in the small-deflection
+regime, via a guided traversal of a tree of possible associations that has
+been thresholded to eliminate associations with negligible probability.  We
+compared results from this deterministic algorithm with our MCMC results. We
+also used simulated datasets to verify that marginal distributions produce
+credible intervals of probability $P$ that have prior-averaged coverage
+equal to $P$, a simplified version of the validation tests proposed by Cook,
+Gelman, and Rubin \cite{CGR06-Validn}.
+

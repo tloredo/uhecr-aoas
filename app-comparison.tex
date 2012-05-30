@@ -1,0 +1,175 @@
+%..............................................................................
+\section{Comparison with prior Bayesian work}
+\label{app:WMJ11}
+
+Watson, Mortlock, and Jaffe \cite{WMJ11-BayesUHECR} (WMJ11) have
+independently developed an approximate Bayesian approach for assessing
+evidence for association of the PAO-08 data (with data for the 27 UHECRs in
+periods 1 and 2) with nearby AGN.  They consider the best-fit CR directions
+as points drawn from a Poisson intensity on the celestial sphere constructed
+as a mixture of distributions located at AGN directions, with weights
+reflecting the AGN distances (corresponding to a standard-candle
+source intensity), and an isotropic background component.  The source
+components have the form of a ``two-dimensional Gaussian on the sphere,''
+with the probability density for a best-fit measured direction $\hat n$
+arising from an AGN at $\hdrxn$ given by
+\be
+p(\hat n|\hdrxn)
+  = \frac{1}{2\pi\left(1 - e^{-2/\sigma^2}\right)}
+    \exp\left(-\frac{1 - \hat n\cdot\hdrxn}{\sigma^2}\right),
+\label{sphere-gauss}
+\ee
+with $\sigma$ dubbed the ``smearing angle.'' This is a Fisher distribution
+(as in equation~\ref{rho-def}), with concentration parameter $\kappa =
+1/\sigma^2$.  They focus on a model with  $\sigma = 3^\circ$ ($\approx
+0.052$~rad) [sic], intended to reflect a combination of $\approx 1^\circ$
+measurement uncertainties and few-degree magnetic deflections.  They also
+provide a few results for $\sigma = 6^\circ$ and $10^\circ$ [sic].\footnote{We
+note that the parameter $\sigma$ is not an angle and does not have angular
+units (degrees or radians).  We presume these dimensionally inconsistent
+equations imply solving the nonlinear equation relating $\sigma$ (or $\kappa$)
+to the stated angular scale; e.g., for a 68.3\% confidence or credible region
+with angular radius $\theta$, in the small-angle limit $\sigma \approx
+0.66\theta$ (e.g., $\sigma \approx 0.035$ for $3^\circ$ uncertainties;
+see equation~(\ref{kappa-theta})).}
+They calculate an approximate likelihood function by finely pixelizing the
+celestial sphere, calculating the number of cosmic ray direction
+measurements expected in each pixel, and multiplying Poisson counting
+probabilities for the bins (with one count for bins containing a best-fit
+cosmic ray direction, and zero counts for the remaining bins).
+
+WMJ11 adopt a similar candidate host population as was used in the PAO-07 and
+PAO-08 analyses (the nearby AGN in the 12th VCV compilation; WMJ11 consider
+$\approx 900$ AGN within 100~Mpc) on the presumption that it is almost
+complete for the nearest AGN.  They conclude that there is ``strong evidence
+of a UHECR signal from the known VCV AGNs,'' such that at least some UHECRs
+come from AGN in the VCV catalog (or from sources within a few degrees of the
+AGN).  For a $3^\circ$ smearing angle, the marginal posterior density for the
+fraction associated with AGN (our $f$ parameter) has a mode of 0.15, and 68\%
+highest density credible interval of $[0.08, 0.25]$.  For $6^\circ$ and
+$10^\circ$ smearing angles the estimated association fraction is larger, but
+the marginal distribution is also somewhat broader.  They do not compare their
+association model to an alternative, and thus do not compute Bayes factors.
+
+Our analysis framework and our results differ in significant ways from those
+of WMJ11 (focusing on our results for the data from Periods~1 and 2). 
+Methodologically, our approach is based on explicit modeling of associations
+(via marginal likelihood factors associating a particular cosmic ray with a
+particular AGN or the background), rather than considering best-fit cosmic
+ray directions to be samples from a point process.  As noted in
+\S~\ref{sec:dtxn}, a factor in the likelihood function in our approach
+is analogous to that underlying FMMs, but this
+mixture-like factor arises as a consequence of some of our modeling
+assumptions; it is not a starting point, and it does not hold for all
+astrophysically interesting association models that our framework
+accommodates.  For example, in \S~\ref{sec:summary} we describe a more
+realistic family of magnetic deflection models (``radiant'' models with
+exchangeable rather than IID deflections for cosmic rays comprising a
+multiplet) whose likelihood function does not have the simple FMM form.  In
+other common astronomical coincidence assessment problems, such as
+establishing associations of sources detected in different electromagnetic
+wavebands, only singlet associations are meaningful; such models have no FMM
+representation but may be accommodated by our framework.  Further
+discussion of this is in \cite{Loredo12-Coinc}.
+
+Another point of departure in methodology is that we distinguish measurement
+error from magnetic deflection.  In the buckshot model adopted here, both
+the measurement error and deflection distributions are Fisher distributions
+(note that the composition of these distributions is not a Fisher
+distribution).  In radiant models, for example, the deflection distribution
+is more complicated.  Explicit, separate treatment of these physically
+distinct effects enables handling heteroskedastic measurement errors
+for the UHECR directions (PAO-10 reports only a typical measurement
+error, but future catalogs will hopefully report the heteroskedastic
+uncertainties found in detailed air shower fits).  Heteroskedastic
+uncertainties further thwart a simple FMM representation for the likelihood,
+again emphasizing the need for a framework built on explicit modeling
+of individual associations.
+
+Our approach also provides explicit estimates of probabilities for possible
+associations.  In our MCMC algorithm, these can be found by calculating
+frequencies for different values of the $\lambda$ labels; we report
+such results in \S~\ref{sec:results}.  WMJ11 report a weight for
+candidate associations, but note it is not a rigorous probability.
+
+WMJ11 analyze the data from Periods~1 and 2 jointly, without commenting on the
+possible effects of tuning on the implications of the Period~1 data.
+
+Turning to astrophysical differences, we adopt the G10 volume-complete catalog
+of nearby AGN as a candidate host catalog, rather than the 12th VCV catalog
+used by WMJ11 and others.  Notably, 6 of the 17 AGN in the G10 catalog are not
+in the 12th VCV catalog (one of them appears in the more recent 13th VCV
+catalog).  We chose the G10 catalog both for its completeness, and because use
+of a small catalog was convenient for an initial study, as it enabled more
+extensive analyses of real and simulated data than would be possible with AGN
+from VCV. Figure~\ref{fig:f1000} shows our marginal posterior density for $f$
+for $\kappa = 1000$ (corresponding to a deflection scale $\approx 2.7^\circ$)
+for model $M_1$, for different subsets of the PAO-10 data. The mode based on
+the combined data from Periods~1 and 2 is at $f \approx 0.1$, about a
+two-thirds of the WMJ11 value of $\approx 0.15$, even though their catalog
+contains more than 50 times as many potential counterparts.  Our common
+assumption of a standard candle intensity distribution is probably the main
+reason that the results are not more discrepant. In particular, although WMJ11
+include AGN at distances to 100~Mpc in their catalog, the standard candle
+assumption forces the analysis to assign negligible detectable rates to all
+but the closest few AGN.  The similarity of our estimates despite the
+disparity between our AGN catalog sizes highlights how restrictive the
+standard candle assumption is.
+
+\begin{figure}
+\centerline{\includegraphics[angle=-90,width=.9\textwidth]{margf_kappa1000_17AGNs.eps}}
+\caption{Posterior distributions for $f$ for model $M_1$, conditioned on
+$\kappa$ = 1000, for various subsets of the PAO-10 data.}
+\label{fig:f1000}
+\end{figure}
+
+We explore a far greater range of magnetic deflection angular scales
+than did WMJ11.  Their discussion of deflection scales implicitly
+presumes UHECRs are light nuclei.  Recent cosmic ray data and
+theoretical models motivate serious consideration of the possibility
+that many or most UHECRs are heavy nuclei, as noted above.
+
+Finally, we differ qualitatively in our conclusions about the strength of
+evidence for association of UHECRs with nearby AGN, particularly after
+examining period-to-period differences, and considering the impact of
+period~3 data (unavailable to WMJ11).  We quantify the support for
+association hypotheses by calculating Bayes factors explicitly comparing
+association and null models, both conditional on $\kappa$ (in
+Figure~\ref{fig:BFplot}) and marginalized over a broad $\kappa$
+range (in Table~\ref{BFTable}).
+
+WMJ11 do not calculate Bayes factors comparing their association and null
+models.  Their claim of strong evidence for association appears to be based on
+the small marginal posterior density for values of the association fraction
+near zero.  But this fails to distinguish parameter estimation from
+model assessment.  As long as the likelihood for models with $f=0$ does not
+vanish, parameter estimation (with a continuous prior on $f$) simply does not
+address how the $f=0$ hypothesis compares to alternatives.  To do this
+requires assigning a finite prior probability for $f=0$, which we do here by
+considering it as a separate model and calculating Bayes factors.  The Bayes
+factor comparing nested models depends on the size of the parameter space of
+the larger model in a way that accounts for ``fine tuning'' of the additional
+model parameters:  the larger model will have parameter values producing
+better fits than the smaller model, but if the values of the additional
+parameters are close enough to the default values corresponding to the smaller
+model, the marginal likelihood for the larger model will be {\em smaller} than
+that for the smaller model (the well-known ``Ockham's razor'' behavior of
+Bayes factors).  Focusing on low-dimensional marginal distributions, such as
+the posterior density for $f$, can give an exaggerated impression of the
+strength of evidence for the larger model because it suppresses the large
+volume of parameter space associated with its additional parameters.  Here,
+association models have not only the $f$ parameter, but also many latent label
+parameters (i.e., many association hypotheses that cannot be ruled out a
+priori).  Calculation of the Bayes factor takes all of this into account.
+Using the Period~1 and Period~2 data available to WMJ11 does in fact produce
+large Bayes factors favoring association.  But partitions of the data
+excluding Period~1 data produce much smaller Bayes factors, even though the
+$p(f)$ distributions found with these partitions assign very small density to
+$f=0$. The Bayes factor calculations indicate that the complexity of
+association models may not be justified by existing data.
+
+Perhaps most importantly from an astrophysical perspective, we performed
+more extensive checking of our models, calling into question the adequacy of
+our shared isotropic background and standard candle assumptions.  We discuss
+this further in \S~\ref{sec:summary}.
+

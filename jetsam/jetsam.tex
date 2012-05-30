@@ -1,0 +1,35 @@
+
+To explore the latter possibility, we have to step outside the model family
+one way or another.  One path is to explicitly introduce further alternative
+models (perhaps nonparametric) and perform formal inference in the broader
+class.  Another is to abandon a formal Bayesian approach, and instead seek
+some measure of compatibility of model predictions with the data, expressing
+how surprising the observed data are in light of any of the considered
+models, e.g., using test statistics with $p$-values, or cross-validation
+checks.  Neither approach is definitive.  The former approach still
+conditions on a family of models, albeit a broader one.  The latter approach
+does not explicitly specify new alternatives; but how one chooses to measure
+predictive compatibility will concentrate power in some implicitly specified
+subspace of the space of all models (\enote{REF-LR05}, \S~14.6).
+
+
+BF table without 1+2:
+
+\begin{table}
+\begin{tabular}{|c|c|c |c| c| c| c|}
+\hline
+& & \multicolumn{5}{|c|}{Bayes factors}\\
+\cline{3-7}
+ Priors for $f$ & Model &Period 1 & Period 2 & Period 3 & Periods 2\&3 & Periods 1\&2\&3\\
+\hline
+beta(1,1) & 17 AGNs & 30.53 & 6.51 & 0.15 = 1/6.67 & 0.99 & 25.90\\
+ & 2 AGNs  & 14.78 & 9.89 & 0.11 = 1/9.09 & 1.06 & 50.67\\
+\hline
+beta(1,5) & 17 AGNs & 39.27 & 15.12 & 0.52 = 1/1.92 & 3.39 & 78.69\\
+ & 2 AGNs  & 31.97 & 27.97 & 0.42 = 1/2.38 & 4.08 & 176.65\\
+\hline
+\end{tabular}
+\caption{Overall Bayes factors comparing association models with 17 AGNs
+or 2 AGNs to the null isotropic background model for two different priors for $f$}\label{tab:BFtab}
+\label{BFTable}
+\end{table}

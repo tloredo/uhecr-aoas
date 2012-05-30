@@ -1,0 +1,149 @@
+\section{Model checking}\label{sec:checking}
+
+In this section we describe results of two types of tests of our models.
+Both are motivated by the evident variability of some of the parameter
+estimation and model comparison results presented above with the choice of
+observing period or periods to include in the analysis.
+
+Our first tests address whether the variability indicates that the
+properties of the detected cosmic rays change from period to period,
+presuming that one of our models can adequately describe the data within
+each period. We implement a simple Bayesian change-point analysis that shows
+there is no significant evidence for variability of model parameters from
+period to period.  That is, presuming one of the models is adequate, the
+apparent discrepancy among the Bayes factors in Table~\ref{BFTable} reflects
+variability that may be expected for these modest sample sizes.
+
+Alternatively, we may consider the possibility that none of the considered
+models accurately describes the data, in which case the variability could be
+an indication of incompatibility of the data with {\em all} of the models.
+To address this, we perform predictive checks using the Bayes factors for
+subsamples of the data as test statistics:  we ask whether the
+period-to-period Bayes factor variations we find using the observed data
+are surprising compared with what one finds from simulations under various
+models.  We first compare the observed Bayes factors with predictions from the
+null model, and then from representative association models.  These tests
+are meant to explore broad compatibility of predictions and
+observations; we make no attempt to formally assign significances to the
+comparison such as $p$-values.
+
+%..............................................................................
+\subsection{Change-point analysis}
+\label{sec:difference_between_periods}
+
+As seen above, including the data from Period~1 can change Bayes factors
+dramatically (but not estimates of $F_T$, $f$, or $\kappa$); also, Bayes
+factors differ markedly even between the {\em untuned} samples, Periods~2
+and 3.  Based on astrophysical considerations, the properties of incident
+UHECRs should not vary over the time scales under consideration.  Even if CRs
+are generated in brief bursts, these bursts would have observed durations of
+hundreds or thousands of years because the cosmic rays would take paths of
+varying lengths to Earth.  Therefore, any evidence indicating that the
+observed properties of cosmic rays are changing over a period of a few years
+would indicate a problem with the data, e.g., statistical inhomogeneity due to
+the special treatment of data in period~1, or instability of the observatory's
+apparatus or data reduction pipeline.
+
+As a simple test for variability in the ensemble properties of cosmic rays
+from period to period, we compared versions of $M_1$ and $M_2$ that allow
+model parameters to change between periods to versions that keep the
+parameters the same for all periods.  We describe implementation and results
+of this change-point analysis in In Supplementary Appendix~\ref{app:chgpt}.  
+It shows that the period-to-period variation of Bayes factors for
+association vs.\ isotropy is consistent with no variation of cosmic ray
+properties across period boundaries.
+
+%..............................................................................
+\subsection{Null model predictive checks}
+
+If the null model is in operation, a measure of surprise for a particular data
+set would be a high Bayes factor favoring an association model.  Of particular
+concern here are the large Bayes factor values we find for the Period~1 data,
+which may not be representative because of tuning.  We ask:  under the null
+isotropic background model and in the absence of tuning, how likely it is to
+see Bayes factors as high as 100 for some values of $\kappa$ in Period~1 (as
+shown in Figure~\ref{fig:BFplot})?
+
+To address this, we generate 200 datasets, each of which has 14 CRs (the
+size of the Period~1 sample).  The CR
+directions are generated uniformly over the sky, and are accepted with
+probability proportional to the exposure map for that direction.  We
+calculated Bayes factors for the 17~AGN association model with $\kappa = 10,
+31.62, 100, 316.2$ and 1000.
+Figure~\ref{fig:unifCumBF} shows cumulative histograms (as survival
+functions) of the resulting Bayes factors, for each value of $\kappa$.  Most
+of the datasets have Bayes factors less than 1. The smallest Bayes factor we
+found is 0.04. Out of these 200 datasets, we found only 3 datasets with
+$B_{10} \geq 10$.  Each of these datasets has $B_{10} \geq 10$ only at one
+value of $\kappa$ that we computed. The Bayes factors are 29 ($\kappa=10$),
+44 ($\kappa = 31.62$) and 13 ($\kappa = 316.2$).  We conclude that the Bayes
+factor greater than 100 seen in Period~1 is unlikely to be due to chance if
+UHECRs are fairly sampled from isotropically distributed directions.  This
+implies the distribution of directions in the Period~1 sample is
+anisotropic, but the calculation does not address whether this may be due to
+tuning or to genuine anisotropy.
+
+\begin{figure}
+\centerline{\includegraphics[angle=-90,width=\textwidth]{BF_cumplot_genUnif_14CRs_logscale.eps}}
+\caption{The number of simulated datasets having Bayes factor $\geq B$
+vs. $B$, based on 200 simulated datasets with 14 CRs generated under the
+null isotropic background model.  Axes are logarithmic.}
+\label{fig:unifCumBF}
+\end{figure}
+
+%..............................................................................
+\subsection{Association model predictive checks}
+
+Now we address compatibility of the discrepant Bayes factors with the
+predictions of the association models.  We ask: under the association model
+with 17 AGNs, how likely is it to simultaneously see large Bayes factors in
+periods 1 or 2 (which have small numbers of detected CRs) and a small Bayes
+factor in Period~3 (which has a larger number of detected CRs)?
+
+To address this, we generate 100 datasets, each with 69 CRs, partitioned
+into samples of size 14, 13 and 42 for periods 1, 2 and 3, respectively.  We
+simulate from a model with association fraction $f=0.1$, near the modes
+found in our analyses of the PAO data.  We first simulate an incident flux
+of cosmic rays by assigning a ray to the AGN population with probability
+equal to $f$, or to the isotropic background with probability $1-f$.
+AGN-generated CRs get assigned to one of the 17 AGN with probabilities
+proportional to the inverse square distances of the AGN. The arrival
+directions of these CRs are drawn from a Fisher distribution centered at the
+source AGN, with $\kappa = 50$.  Each generated CR direction is accepted
+with probability proportional to the exposure map for that direction; a
+dataset is generated when 69 candidate events are accepted.  Subsets
+of each simulated dataset, with sizes corresponding to those of the
+PAO subsamples, were analyzed with models conditioning on various
+values of $\kappa$.  Figure~\ref{fig:assocCumBF} shows cumulative
+histograms of the resulting Bayes factors.
+\mnote{Replaced table with fig}
+
+Out of 100 simulated datasets, we found 17 that have some of the Bayes
+factors $\geq 30$.  Of these, 9 datasets have $B_{10}\geq 30$ in either
+Period~1 or 2, and a low $B_{10}$ value in Period~3, while the other 8
+datasets have $B_{10}\geq 30$ in Period~3 and low $B_{10}$ values in periods
+1 and 2.  Out of these 17 datasets, 10 of them have some values of
+$B_{10}\geq 100$; two have Bayes factors over 1000 (in either Period~1
+or Period~2).  
+\mnote{Modified discussion}
+These results indicate that Bayes factors as high as 100 (as seen in
+Period~1) are not unlikely under the association model, and also that
+large between-period variations in the Bayes factors should be expected.
+ However, since Bayes factors $\gg 1$ are uncommon, and since the
+distribution is independent from one interval to the next, it is
+unlikely to see significantly large Bayes factors in {\em both} periods
+1 and 2. We crudely estimate that the probability for seeing Bayes
+factors whose product is $> 1000$ is less than $\sim 10^{-3}$.  Thus the
+pattern of Bayes factors is surprising, again indicating that the tuning
+of the Period~1 data is problematic.
+
+\begin{figure}
+\centerline{\includegraphics[angle=-90,width=\textwidth]{BFCumplot-AssocnSimn.eps}}
+\caption{The number of simulated datasets having Bayes factor $\geq B$
+vs. $B$, based on 100 simulated datasets with CRs generated under the
+17-AGN association model with $f=0.1$ and $\kappa=50$.  Panels show
+results for datasets with sizes corresponding to the PAO samples for
+periods 1--3, as labeled; colors of curves indicate the $\kappa$ value
+used for analyzing the simulated data.  Axes are logarithmic.}
+\label{fig:assocCumBF}
+\end{figure}

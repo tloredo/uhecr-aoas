@@ -1,0 +1,74 @@
+\section{Simulation study}\label{sec:simulations}
+
+As seen in Section 5.2, adding the CR data from period 1 markedly changes
+the Bayes factors; yet, formal hypothesis testing in Section 5.3 prefers the models
+with the same parameters in all periods. In this section, we use simulations to  study the potential random variation of the Bayes factors among the 3 periods. The goal is to
+answer the following two questions: 1) under the null isotropic background model,
+how likely it is to see Bayes factors as high as 100  for some values of $\kappa$ in period 1 (as seen in Figure~\ref{fig:BFplot}),
+and 2) under the association model with 17 AGNs, how likely it is to see large Bayes factors
+in periods 1 or 2 (which have small number of detected CRs) and small Bayes factors in
+period 3 (which has higher number of detected CRs).
+
+To answer 1), we generated 200 datasets, each of which has 14 CRs. The CR directions are
+generated uniformly over the sky, and are accepted with the probability proportional
+to the exposure map for that direction. We performed Gibbs sampling at $\kappa
+= 10, 31.62, 100, 316.2$ and 1000. Figure~\ref{fig:unifCumBF} shows the cumulative histogram (as a survival function) of the
+Bayes factors of these 200 datasets for each value of $\kappa$.
+Most of the datasets have Bayes factors less than 1. The smallest Bayes factor
+we found is 0.04. Out of these 200 datasets, we found only 3 datasets
+that have $B_{10}\geq10$. Each of these datasets has $B_{10}\geq10$ only at one value
+of $\kappa$ that we computed. The Bayes factors are 29 ($\kappa=10$), 44 ($\kappa = 31.62$)
+and 13 ($\kappa = 316.2$).
+We conclude that the Bayes factor greater than 100 seen in period 1 is unlikely to be due to chance, although it could, of course, be due to tuning.
+
+\begin{figure}
+\centerline{\includegraphics[width=3in,angle=-90]{BF_cumplot_genUnif_14CRs_logscale.eps} }
+\caption{The number of datasets having Bayes factor $\geq B$ vs. $B$. Each of the 200 datasets has
+14 CRs generated under the null isotropic background model.}
+\label{fig:unifCumBF}
+\end{figure}
+
+To answer 2), we generated 100 datasets, each of which has 69 CRs, 14, 13 and 42 for periods
+1, 2 and 3, respectively. Each CR has a probability of $f=0.1$ of being generated from an AGN,
+and $1-f = 0.9$ of being generated from the background source. AGN-generated CRs get
+assigned to one of 17 AGNs with probabilities proportional to the inverse square distance
+of the AGNs. The arrival directions of these CRs follow a Fisher distribution with $\kappa = 50$ and
+centered at its AGN source. All the generated CR directions are accepted with probability
+proportional to the exposure map for that direction. Out of these 100 datasets, we found
+17 of them that have some of the Bayes factors $\geq 30$.  Of these, 9 datasets have
+some values of $B_{10}\geq 30$ in periods 1 or 2 and low $B_{10}$ values in period 3, while the other
+8 datasets have some values of $B_{10}\geq 30$ in period 3
+and low $B_{10}$ values in periods 1 and 2. Out of these 17 datasets, 10 of them have some values
+of $B_{10}\geq 100$. These Bayes factors are shown in Table~\ref{tab:BFsim}.
+We conclude that Bayes factor as high as 100 (as seen in period 1) are likely under the association model and the large between-period variation seen in the data are likely.
+
+
+
+\begin{table}[h]
+\begin{tabular}{|c|c |c| c| c| c|c|c|c|c|c|c|}
+\hline
+ & & \multicolumn{10}{|c|}{Dataset}\\
+\cline{3-12}
+Period & $\kappa$ & 19 & 48 & 51 & 57 & 69 & 73 & 84 & 89 & 93 & 100\\
+\hline
+1 & 10 & 0.50 & 0.26 & 15 & 1.44 & 0.16 & 1.27 & 172 & 0.12 & 1.38 & 0.28\\
+   & 32 & 0.17 & 0.28 & 126 & 2.72 & 0.14 & 1.98 & 1198 & 0.14 & 0.45 & 0.58\\
+   & 100 & 0.09& 0.33 & 202 & 3.34 & 0.14 & 0.83 & 1240 & 0.15 & 0.27 & 1.06\\
+   & 316 & 0.05 & 0.29 & 7.11 & 1.41 & 0.13 & 0.08 & 160 & 0.09 & 0.27 & 0.38\\
+   & 1000 & 0.04 & 0.15 & 0.20 & 0.23 & 0.07& 0.06 &  1.60 & 0.05 & 0.16 & 0.11\\
+\hline
+2 & 10 & 0.22 & 49 & 0.14 & 0.09 & 4.06 & 0.12 & 0.24 & 0.39 & 6.04 & 0.11\\
+   & 32 & 0.13 & 221 & 0.14 & 0.06 & 61 & 0.10 & 0.14 & 0.28 & 27 & 0.09\\
+   & 100 & 0.06 & 557 & 0.13 & 0.04 & 767 & 0.10 & 0.09 & 0.19 & 124 & 0.07\\
+   & 316 & 0.05 & 71 & 0.06 & 0.04 & 1742 & 0.07 & 0.09 & 0.09 & 218 & 0.05\\
+   & 1000& 0.04 & 0.88 & 0.04 & 0.04 & 41 & 0.04 & 0.07 & 0.05 & 193 & 0.04\\
+\hline
+3 & 10 & 32 & 0.11 & 0.07 & 10.38 & 0.28 & 93 & 0.10 & 19 & 0.53 & 59\\
+   & 32 & 174 & 0.17 & 0.09 & 175 & 0.14 & 146 & 0.04 & 130 & 0.68 & 539\\
+   & 100 & 7.35 & 0.28 & 0.19 & 396 & 0.04 & 30 & 0.03 & 261 & 0.49 & 119\\
+   & 316 & 0.18 & 0.36 & 0.23 & 25 & 0.02 & 0.87 & 0.02 & 132 & 0.26 & 0.87\\
+   & 1000 & 0.03 & 0.29 & 0.17 & 1.63 & 0.02 & 0.31 & 0.02 & 1.26 & 0.08 & 0.03\\
+\hline
+\end{tabular}
+\caption{Bayes factors from the simulated dataset from 17-AGN association model}\label{tab:BFsim}
+\end{table}

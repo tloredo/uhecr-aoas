@@ -1,0 +1,185 @@
+\section{Summary and Discussion}
+\label{sec:summary}
+
+We have described a new multilevel Bayesian framework for modeling the
+arrival times, directions, and energies of UHECRs, including statistical
+assessment of directional coincidences with candidate sources.
+Our framework explicitly models cosmic ray emission, propagation (including
+deflection of trajectories by cosmic magnetic fields), and detection.  This
+approach cleanly distinguishes astrophysical and experimental processes
+underlying the data.  It handles uncertain parameters in these processes via
+marginalization, which accounts for uncertainties while allowing use of all
+of the data (in contrast to hypothesis testing approaches that optimize over
+parameters, requiring holding out a subset of the data for tuning).
+We demonstrated the framework by implementing calculations with simple but
+astrophysically interesting models for the 69 UHECRs with energies above
+55~EeV detected by PAO and reported in PAO-10.  Here we first summarize
+our findings based on these models, and then describe directions for
+future work.
+
+%Its Bayesian underpinning enables accounting for
+%a priori uncertainty in model parameters via averaging (marginalization).
+%This stands in contrast to previously-used hypothesis testing approaches
+%that handle free parameters defining a test procedure by optimizing using
+%a subset of the data, with subsequent analysis omitting the tuning data.
+
+%..............................................................................
+\subsection{Astrophysical results}
+
+We modeled UHECRs as coming from either nearby AGN (in a volume-limited
+sample including all 17 AGN within 15~Mpc) or an isotropic background
+population of sources; AGN are considered to be standard candles in
+our models.  We thoroughly explored three models.  In $M_0$ all CRs come
+from the isotropic background; in $M_1$ all CRs come from either a
+background or one of the 17 closest AGN; in $M_2$ all CRs come from either
+a background source or one of the two closest AGN (Cen~A and NGC~5128,
+neighboring AGN at a distance of 5~Mpc).  The data were reported in three
+periods.  Data from Period~1 were used to tune the energy threshold defining
+the published samples in all periods by maximizing an index of anisotropy in
+Period~1.  Out of concern that this tuning compromises the data in Period~1
+for our analysis, we analyzed the full dataset and various subsamples,
+including an ``untuned'' sample omitting Period~1 data.
+
+Using {\em all} of the data, Bayes factors indicate there is strong evidence
+favoring either $M_1$ or $M_2$ against $M_0$ but do not discriminate between
+$M_1$ and $M_2$.  The most probable models associate about 5\% to 15\% of
+UHECRs with nearby AGN, and strongly rule out associating more than
+$\approx 25$\% of UHECRs with nearby AGN.  Most of the high-probability
+associations in the 17~AGN model are with the two closest AGN.
+
+However, if we use only the {\em untuned} data, the Bayes factors are
+equivocal (although the most probable association models resemble those
+found using all data).  If we subdivide the untuned data, we find positive
+evidence for association using the Period~2 sample, but weak evidence {\em
+against} association using the much larger Period~3 sample.  Together, these
+results suggest that the statistical character of the data may differ from
+period to period, due to tuning of the Period~1 data or other causes.
+
+One way to explore this is to ask whether the data from the various periods
+are better explained using models with differing parameter values rather
+than a shared set of values.  We investigated this via a change-point
+analysis that considered the times bounding the periods as candidate change
+points.  The results are consistent with the hypothesis that the parameters
+do {\em not} vary between periods, justifying using the combined data for
+these models.  This suggests the variation of the Bayes factors across
+periods is a consequence of the modest sample sizes.  However, the
+change point analysis does not address the possibility that none of the
+models is adequate, with model misspecification being the cause of the
+apparently discrepant Bayes factors.
+
+We used simulated data from both the isotropic model and
+high-probability association models to perform predictive checks of our
+models, using the Bayes factors based on subsets of the data as test
+statistics.  The simulations show that the between-period variation seen
+here is not unexpected for the currently available sample sizes when data are
+simulated from association models.  The simulations also indicate that large
+Bayes factors favoring association are unlikely for {\em untuned} samples of
+the size of the Period~1 sample in the context of isotropic models.  These
+predictive checks indicate that the Period~1 data are consistent with being
+a fair sample from an association model but not from an isotropic model.
+Whether the effects of tuning could explain the apparent inconsistency of
+the Period~1 data with an isotropic origin remains an open question that is
+not easy to address without access to the untuned data.
+
+\mnote{Added Cen~A summary}
+Overall, the results indicate the data are consistent with standard
+candle models that assign $\approx 2$\% to 20\% of UHECRs to nearby AGN
+(within 15~Mpc), with the remainder assigned to sources drawn from an
+isotropic distribution.
+Relatively small magnetic deflection angular scales of $\approx 3^\circ$
+to $20^\circ$ are favored; models that assign a large fraction of UHECRs
+to a single nearby source (e.g., Cen~A) are ruled out unless very large
+deflection scales are specified a priori, and even then they are disfavored.
+
+Despite the consistency of these results, we hesitate to offer these models
+as astrophysically plausible explanations of the PAO UHECR data, both
+because of how important the problematic period~1 sample is in the analysis,
+and because of astrophysical limitations of the models considered here and
+elsewhere.  In particular, the high-probability models assign the
+vast majority of UHECRs to sources in an isotropic distribution. But the
+observation by PAO of a GZK-like cutoff in the energy spectrum of UHECRs
+argues strongly that UHECRs originate from within $\sim 100$~Mpc, where the
+distribution of both visible matter (galaxies) and dark matter is
+significantly {\em an}isotropic.  If most or all UHECRs are protons, so that
+magnetic deflection is not very strong, an isotropic distribution of
+UHECR arrival directions is implausible. It then may be the case that some
+of the strength of the evidence for association with nearby AGN is due to
+the ``straw man'' nature of the isotropic alternative.  On the other hand, if
+most UHECRs are heavy nuclei, then strong magnetic deflection could
+isotropize the arrival directions. The highest probability association
+models have relatively small angular deflection scales, but it could be that
+the few UHECRs that these models associate with the nearest AGN happen to be
+protons or very light nuclei.  Future models could account for this
+by allowing a mixture of $\kappa$ values among cosmic rays, as noted
+in \S~\ref{sec:dflxn}.
+
+In addition, the standard candle cosmic ray intensity model adopted here and
+in other studies is astrophysically implausible and very likely strongly
+constrains inferences.  The strongest visible clustering of measured UHECR
+directions is toward the two closest AGN, just 5~Mpc away and only a few
+degrees apart on the sky.  Most of the high-probability associations
+identified in our models are to these AGN.  They are so close that they
+imply standard-candle cosmic ray intensities that would produce a negligible
+flux of cosmic rays from the vast majority of other AGN within 100~Mpc.  Put
+another way, a standard-candle model assigning just one UHECR to an AGN near
+the 100~Mpc GZK limit would imply a cosmic ray flux from nearby AGN so huge
+that this scenario is ruled out simply by visible inspection of sky maps. 
+Models with more flexible luminosity functions would likely allow assignment
+of many more UHECRs to sources spanning a range of distances.
+
+%..............................................................................
+\subsection{Future directions}
+
+All of these considerations indicate a more thorough exploration of
+UHECR production and propagation models is needed.  We thus consider
+the analyses here to be a demonstration of the utility and feasibility
+of analyzing such models within a multilevel Bayesian framework, and
+not a definitive astrophysical analysis of the data.
+We are pursuing more complex models elsewhere, expanding on the present
+analysis in four directions.
+
+First, we are considering larger, statistically well-characterized catalogs
+of potential hosts, e.g., the recently-compiled catalog of X-ray selected
+AGN detected by the Burst and Transient (BAT) instrument on the {\em Swift}
+satellite, a catalog considered by PAO-10.
+
+Second, we are building more realistic background distributions, for example
+by using the locations of nearby galaxy clusters, or the entire nearby
+galaxy distribution, to build smooth background densities (e.g., via kernel
+density estimation, or fitting of mixture or multipole models).
+
+Third, we are considering richer luminosity function models, including models
+assigning a distribution of cosmic ray intensities to all candidate sources,
+and models that place some sources in ``on''
+states and the others ``off.''  The latter models are motivated both by the
+possibility of beaming of cosmic rays, and by evidence for AGN intermittency
+in jet substructure, and could enable assignment of significant numbers of
+UHECRs to both distant and nearby sources.
+
+Finally, more complicated deflection models are possible.  
+For example, we have developed a class of ``radiant'' models that produce
+correlated deflections (as seen in some astrophysical simulations).  For a
+radiant model, each source has a single guide direction associated with it,
+drawn from a Fisher distribution centered at the source direction, with
+concentration $\kappa_g$; the guide direction serves as a proxy for the shared
+magnetic deflection history of cosmic rays from that source.  Each cosmic ray
+associated with that source then has its arrival direction drawn from an
+independent Fisher distribution centered about the guide direction, with
+concentration potentially depending on cosmic ray energy and source distance;
+this distribution describes the effect of the deflection history unique to a
+particular cosmic ray.  The resulting directions for a multiplet will cluster
+along a ray pointing toward the source.  The resulting joint distribution for
+the directions in a multiplet (with the guide direction marginalized) is
+exchangeable but not independent.
+
+For the current, modest-sized UHECR catalog, the complexity of
+some of these generalizations  is probably not warranted.  But PAO is
+expected to operate for many years, and the sample is continually growing in
+size.  Making the most of existing and future data will require, not only
+more realistic models, but also more complete disclosure of the data.
+In particular, a fully Bayesian treatment---including modeling of the energy
+dependence in the UHECR flux and deflection scale---requires data
+uncorrupted by tuning cuts.  Further, the most accurate analysis should use
+event-specific direction and energy uncertainties (likelihood summaries),
+rather than the typical error scales currently reported.  We hope 
+our framework helps motivate more complete releases of future PAO data.

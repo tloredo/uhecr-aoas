@@ -1,0 +1,343 @@
+\section{Results}
+\label{sec:results}
+
+Recall that the UHECR data reported by PAO-10 are divided into three periods.
+The PAO team used an initially larger period~1 sample (including
+lower-energy events) to optimize an energy threshold determining which
+events to analyze in period~2; the reported period~1 events are only those
+with energies above the optimized threshold.  The optimization maximized a
+measure of anisotropy in the above-threshold Period~1 sample.  Without access
+to the full Period~1 sample, we cannot evaluate the impact of this
+optimization on our modeling of anisotropy in the reported Period~1 data
+(nor can we usefully pursue a Bayesian treatment of a GZK energy cutoff
+parameter).  Because of this complication, we have performed
+analyses for various subsets of the data.  As our main results, we report
+calculations using data from Periods 2 and 3 combined (``untuned data'') and
+for Periods 1, 2, and 3 combined (``all data'').  We also report some
+results for each period considered separately, and we use them to perform a
+simple test of consistency of the results across periods, in an effort
+to assess the impact of tuning on the suitability of the Period~1 data
+for straightforward statistical analysis.
+
+%..............................................................................
+\subsection{Results conditioning on the deflection scale, $\kappa$}
+
+We first consider models conditional on the value of the magnetic deflection
+scale parameter, $\kappa$, calculating Bayes factors comparing models,
+and estimates of the association fraction, $f$.
+
+We report model comparison results as curves showing Bayes
+factors as functions of $\kappa$.  These quantities are astrophysically
+interesting but must be interpreted with caution.  The actual values of the
+conditional Bayes factors can only be interpreted as Bayes factors for a
+particular value of $\kappa$ deemed interesting {\em a priori}.  For example,
+were one to assume that UHECRs are protons, adopt a particular Galactic
+magnetic field model, and assume that intergalactic magnetic fields do not
+produce significant deflection (which is plausible for protons from local
+sources), one would be interested only in large values of $\kappa$ of order
+several hundred (corresponding to small angular scales for deflection).  On
+the other hand, if one presumed that UHECRs are predominantly heavy nuclei,
+then deflection by Galactic fields could be very strong, corresponding to
+$\kappa$ of order unity (deflection by intergalactic fields might also be
+significant in this case).  Models hypothesizing that most UHECRs are
+heavy nuclei produced by Cen~A would fall in this small-$\kappa$ regime.
+By presenting results conditional on $\kappa$, various cases
+such as these may be considered.  Also, the Bayes factor conditioned on
+$\kappa$ is proportional to the marginal likelihood for $\kappa$, so the
+same curves summarize the information in the data for estimating $\kappa$ if
+it is considered unknown.  We plot the curves against a logarithmic $\kappa$
+axis, so they may be interpreted (up to normalization) as posterior
+probability density functions based on a log-flat $\kappa$ prior.
+
+The Bayes factors comparing models $M_1$ and $M_2$ to $M_0$ for various values
+of $\kappa\in[1,1000]$, and for various partitions of the data, are shown in
+Figure~\ref{fig:BFplot}.  For cases using only the untuned data (periods 2, 3,
+and $2+3$), we find that both BF$_{10}$ and BF$_{20}$ (see
+equation~\ref{BF10+20}) are close to 1 for all values of $\kappa\in[1,1000]$
+for the beta-(1,1) (uniform) prior for $f$.  The Bayes factors are only
+a little higher in the case of beta-(1,5) prior, indicating the results
+are robust to reasonable changes in the $f$ prior. These values imply
+that the posterior odds for the association models $M_1$ and $M_2$
+versus the null isotropic background model $M_0$ are nearly equal to the
+prior odds, indicating the untuned data provide little evidence for or
+against either association model versus the isotropic model.
+
+\begin{figure}
+\centerline{\includegraphics[angle=-90,width=\textwidth]{BF_kappa_17AGNs_1+2.eps}}
+\caption{Bayes factors comparing the assocation model with 17 AGNs (top row) or
+2 AGNs(bottom row) with the null isotropic background model, conditional
+on $\kappa$, shown as a function of $\kappa$ (bottom axis) and the
+corresponding deflection angle scale, $\sigma$ (top axis).  Results are
+shown for various partions of the data (identified by line style,
+identified in the legend), and for two choices of the prior on $f$: a
+flat prior (left column), and a Beta$(1,1)$ prior (right column).}
+\label{fig:BFplot}
+\end{figure}
+
+Considering the Period~1 data qualitatively changes the results.  The
+solid (blue) curves in Figure~\ref{fig:BFplot} show the Bayes factor
+vs.\ $\kappa$ results based solely on the Period~1 data; there is
+strong evidence for association models conditioned on $\kappa$ values
+of around 50 to 100.\footnote{A common convention for interpreting
+Bayes factors is due to Kass and Raftery, who consider a Bayes factor between
+3 and 20 to indicate ``positive'' evidence and between 20 and 150 to indicate
+``strong'' evidence \cite{Kass:Raft:baye:1995}.}
+Analyzing the data from all three periods jointly produces the long-dashed
+(purple) curves.  Using a uniform prior for $f$, we find BF$_{10}$ attains a
+maximum of 90 at $\kappa\approx 46$ while BF$_{20}$ attains a maximum of 262
+at $\kappa\approx 38$.  Both BF$_{10}$ and BF$_{20}$ are larger than 30 for
+all $\kappa\in[20,120]$.  Both of the association models are strongly
+preferred over the null in this range of $\kappa$, while the comparison is
+inconclusive for $\kappa$ outside this range.
+
+The originally published data (in PAO-08) covered periods 1 and 2.  For
+comparison with studies of that original catalog, Figure~\ref{fig:BFplot}
+include curves showing the Bayes factor vs.\ $\kappa$ based on data
+from periods 1 and 2.  This partition of the data produces the largest
+Bayes factors, $\sim 1000$ for $\kappa \approx 50$.  The curves are
+qualitatively consistent with accumulation of evidence from Period~1 and
+Period~2.\footnote{Note that the Bayes
+factor for the $1+2$ partition should not be expected to equal the
+product of the Bayes factors based on the Period~1 and Period~2 partitions,
+because the models are composite hypotheses, and the data from different
+periods generally will favor different values of the model parameters.}
+These results amplify what was found in the analysis using all of
+the data:  the strongest evidence for association comes from the Period~1
+data.  This is troubling because this data was used (along with unreported
+lower-energy data) to tune the energy cut defining all of the samples, and
+there is no way for independent investigators to account for the effects of
+the tuning on the strength of the evidence in the Period~1 data.
+
+We show marginal posterior distributions for $f$ in
+Figure~\ref{fig:postf}, for both $M_1$ and $M_2$, using both the untuned
+data, and using all data. For a given model, the posterior does not
+change much when Period~1 data are included.  The posteriors indicate
+evidence for small but nonzero values of $f$, of order a few percent to
+20\%.  They strongly rule out values of $f>0.3$, indicating that most
+UHECRs must be assigned to the isotropic background component in these
+models.
+This holds even for values of $\kappa$ as small as $\approx 10$,
+corresponding to quite large magnetic deflection scales, as might be
+experienced by iron nuclei in typical cosmic magnetic fields.  Of
+course, when $\kappa=0$ the association models become indistinguishable
+from an isotropic background model.  These results suggest that a model
+assigning {\em all} UHECRs to a single nearby source, such as Cen~A, may be
+tenable only with very large deflection scales.  In Supplementary
+Appendix~\ref{app:CenA} we briefly explore such a model and confirm this
+conclusion.
+
+\begin{figure}
+\centerline{\includegraphics[angle=-90,width=.9\textwidth]{postf.eps}}
+\caption{Posterior distributions for $f$, conditioned on $\kappa$ = 10,
+31.6, 100, 316 and 1000.}
+\label{fig:postf}
+\end{figure}
+
+A recent approximate Bayesian analysis \cite{WMJ11-BayesUHECR}, based on a
+discrete pixelization of the sky, attributed a similar fraction of the
+sample of 27 Period~1 and Period~2 UHECRs to standard-candle AGN sources,
+considering $\approx 900$ AGN within 100~Mpc from the VCV as candidate
+sources.  We compare our approaches and results in Supplementary
+Appendix~\ref{app:WMJ11}.
+
+The posterior mode is at larger values of $f$ for model
+$M_1$ (with 17 AGN) than for $M_2$ (with the two closest AGN), suggesting
+that there is evidence that AGN in the G10 catalog besides Cen~A
+and NGC~4945 are sources of UHECRs.  Our multilevel model allows us to
+address source identification explicitly, by providing a posterior
+distribution for possible association assignments (values of $\lambda$).
+In Table~\ref{lambdaTable} we show marginal posterior probabilities for 
+associations that have non-negligible probabilities under both $M_1$
+and $M_2$, for two representative values of $\kappa$ ($\kappa = 31.62$,
+corresponding to a $15.5^\circ$ deflection scale, is a favored value for
+analyses including Period~1 data as shown below; $\kappa=1000$,
+corresponding to a $2.7^\circ$ deflection scale, may be appropriate if
+UHECRs are predominantly protons).  Rows are labeled by cosmic ray number,
+$i$, and columns by AGN number, $k$; the tabulated values are
+$P(\lambda_i=k|\cdots)$.  Cosmic rays 17 and 20 (in Period~2) are associated
+with Cen~A (AGN 13) with modest to high probability in all cases.  No other
+assignments are robust (notably, Period~3 has no robust assignments, despite
+containing more than three times the number of cosmic rays as Period~2).  If
+UHECRs experience only small deflections, then besides the two Cen~A
+associations, it is highly probable that cosmic ray 8 (in Period~1) is
+associated with NGC~4945. For the larger deflection scale, although nearly a
+quarter of the cosmic rays have candidate associations with probability
+$>0.1$, none of those associations have probability $>0.5$.
+
+We can also calculate posterior probabilities for multiplet assignments.  In
+general, the probability for a multiplet assigning a set of cosmic rays to a
+particular candidate source will not be the product of the probabilities for
+assigning each ray to the source.  In Table~\ref{lambdaTable} we see that
+CRs 17 and 20 are often commonly assigned to Cen~A.  As an example, for
+$M_1$ with $\kappa=1000$, their separate probabilities for assignment to
+Cen~A are 0.85 and 0.94, respectively.  The probability for a doublet
+assignment of both of them to Cen~A in this model is 0.80, which happens to
+be nearly equal to the product of their separate (marginal) assignment
+probabilities.  Were we to marginalize over $\kappa$, the multiplet
+probability would differ from the product, since the preferred value
+of $\kappa$ differs slightly between these two CRs.
+
+\enote{Do we want to say any more about multiplet probabilities, e.g.,
+for low-$\kappa$ models?}
+
+\begin{sidewaystable}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+
+  \hline
+  & \multicolumn{10}{|c|}{17 AGN + isotropic} & \multicolumn{4}{|c|}{2 AGN + isotropic} \\
+  \cline{2-15}
+  & \multicolumn{5}{|c|}{$\kappa$=31.62} & \multicolumn{5}{|c|}{$\kappa$=1000}& \multicolumn{2}{|c|}{$\kappa$=31.62} & \multicolumn{2}{|c|}{$\kappa$=1000} \\
+   \cline{2-15}
+  CR$\backslash$ AGN &
+        2  &   7  &  11  &  13  &  17  &   2   &   11   &   13   &   16  &   17  &   11  &   13  &   11   &   13  \\
+  \hline
+  2 &   -  &   -  & 0.24 & 0.46 &   -  &   -   &   -    &    -   &   -    &   -    & 0.26  & 0.51  &   -    &   -   \\
+  3 &   -  &   -  & 0.42 & 0.20 &   -  &   -   &   -    &    -   &   -    &   -    & 0.47  & 0.22  &   -    &   -   \\
+  4 &   -  &   -  &   -  &    - & 0.17 &   -   &   -    &    -   &   -    &   -    &   -   &    -  &   -    &   -   \\
+  5 &   -  &   -  & 0.18 & 0.28 &   -  &   -   &   -    &    -   &   -    &   -    & 0.22  & 0.35  &   -    &   -   \\
+  6 & 0.11 &   -  &   -  &   -  &   -  &   -   &   -    &    -   &   -    &   -    &   -   &   -   &   -    &   -   \\
+  8 &   -  &   -  & 0.43 & 0.36 &   -  &   -   & 0.89   &    -   &   -    &   -    & 0.47  & 0.38  & 0.90   &   -   \\
+ 13 &   -  &   -  &   -  &   -  & 0.17 &   -   &   -    &   -    &   -    & 0.11   &   -   &   -   &   -    &   -   \\
+ 14 &   -  &   -  & 0.47 & 0.27 &   -  &   -   &   -    &   -    &   -    &   -    & 0.51  & 0.29  &   -    &   -   \\
+ \hline
+ 17 &   -  &   -  & 0.38 & 0.41 &   -  &   -   &   -    & 0.85   &   -    &   -    & 0.41  & 0.44  &   -    & 0.86  \\
+ 18 &   -  &   -  &   -  & 0.15 &   -  &   -   &   -    &   -    &   -    &   -    &   -   & 0.20  &   -    &   -   \\
+ 20 &   -  &   -  & 0.36 & 0.43 &   -  &   -   &   -    & 0.94   &   -    &   -    & 0.39  & 0.46  &   -    & 0.95  \\
+ 23 &   -  &   -  & 0.32 & 0.26 &   -  &   -   &   -    &   -    &   -    &   -    & 0.37  & 0.30  &   -    &   -   \\
+ 26 &   -  & 0.17 & 0.10 & 0.19 &   -  &   -   &   -    &   -    &   -    &   -    & 0.15  & 0.27  &   -    &   -   \\
+ \hline
+ 33 &   -  &   -  & 0.40 & 0.11 &   -  &   -   &   -    &   -    &   -    &   -    & 0.46  & 0.12  &   -    &   -   \\
+ 34 &   -  &   -  & 0.47 & 0.27 &   -  &   -   &   -    &   -    &   -    &   -    & 0.51  & 0.30  &   -    &   -   \\
+ 36 &   -  &   -  & 0.21 & 0.35 &   -  &   -   &   -    &   -    & 0.48   &   -    & 0.24  & 0.42  &   -    &   -   \\
+ 47 &   -  &   -  & 0.14 & 0.42 &   -  &   -   &   -    &   -    &   -    &   -    & 0.15  & 0.48  &   -    &   -   \\
+ 54 &   -  &   -  & 0.19 & 0.46 &   -  &   -   &   -    &   -    &   -    &   -    & 0.21  & 0.52  &   -    &   -   \\
+ 55 & 0.15 &   -  &   -  &   -  &   -  & 0.34  &   -    &   -    &   -    &   -    &   -   &   -   &   -    &   -   \\
+ 57 &   -  & 0.41 &   -  &   -  &   -  &   -   &   -    &   -    &   -    &   -    &   -   &   -   &   -    &   -   \\
+ 67 &   -  &   -  & 0.32 & 0.30 &   -  &   -   &   -    &   -    &   -    &   -    & 0.37  & 0.34  &   -    &   -   \\
+ \hline
+
+\end{tabular}
+\end{center}
+\caption{The posterior probability that each cosmic ray is assigned to each
+AGN given $\kappa = 31.62$ and 1000, using cosmic rays from periods 1+2+3.
+Only assignments with probabilities greater than 0.1 are shown.  The AGN
+identifiers are:  2:~NGC~0613; 7:~NGC~3621; 11:~NGC~4945;
+13:~NGC~5128  (Cen~A); 17:~NGC~6300.}
+\label{lambdaTable}
+\end{sidewaystable}
+
+
+%..............................................................................
+\subsection{Results with $\kappa$ as a free parameter}
+
+Joint marginal posterior distributions for $\log_{10}(\kappa)$ and $f$ are
+shown in Figure~\ref{fig:jointkappaf}, for both association models, and for
+untuned data and all data samples.  For the all-data cases, the joint
+posterior distribution is unimodal and attains its maximum at ($\kappa$=32 ,
+$f$=0.13) and ($\kappa$=32 , $f$=0.09) for the association model with 17
+AGNs and 2 AGNs, respectively.  For untuned data, the joint posteriors are
+bimodal with one of the mode at the value of $\kappa$ slightly less than in
+the case of all 3 periods, and the other mode at $\kappa\approx 1000$,
+similar to the plot of Bayes factors in Figure~\ref{fig:BFplot}.  The
+results from the two samples are more similar than this description may
+indicate; they have significant peaks in the same region, but the likelihood
+function is relatively flat for the largest and smallest values of $\kappa$
+(this is also apparent in Figure~\ref{fig:BFplot}).
+
+In all cases, the preferred values of $\kappa$ correspond to deflection
+scales $\approx 10^\circ$.  As noted above, models of proton propagation in
+cosmic magnetic fields predict deflections of a few degrees.
+The posterior distributions for $\kappa$ are comfortably consistent with
+such predictions, but they do favor the larger scales that would be
+experienced by heavier nuclei.  These scales are consistent with the
+suggestive evidence from PAO that UHECRs may be comprised of heavier nuclei
+than lower-energy cosmic rays.
+
+\begin{figure}
+\centerline{\includegraphics[width=\textwidth]{kappa_f-log_kappa.eps}}
+\caption{Marginal joint posterior distributions for the magnetic deflection
+concentration parameter, $\kappa$, and the association fraction, $f$,
+considering UHECR data from different periods, and candidate host catalogs of 2
+or 17 nearby AGN.  Contours bound HPD credible regions of probability
+0.25 (blue), 0.5 (green), 0.75 (red), 0.95 (brown), and 0.99 (gray).}
+\label{fig:jointkappaf}
+\end{figure}
+
+\mnote{Reformatted table; added 1$+$2 values}
+Values for Bayes factors accounting for $\kappa$ uncertainty are listed in
+Table~\ref{tab:BFtab}, for both association models, and for both individual
+and combined data samples (these values are based on the default flat
+prior for $f$).  We find strong evidence for both association models when
+considering all the cosmic ray data.  If we exclude the tuned data of period
+1, then we see positive evidence for association if we consider only period
+2 but positive evidence for the null model if we consider only period 3.  If
+we pool the untuned data, the data are equivocal.  Together, these results
+raise concerns about consistency of the data and adequacy of the models; we
+address this further below.  These results do not change qualitatively when
+we use the alternative prior for $f$ described in \S~3.2.
+
+\begin{table}
+\begin{tabular}{|c|c|c |c| c| c| c| c|}
+\hline
+& & \multicolumn{6}{|c|}{Data Periods Used}\\
+\cline{3-8}
+ Priors for $f$ & Model & 1 &  2 &  3 &  1\&2 & 2\&3 &  1\&2\&3\\
+\hline
+beta(1,1) & 17 AGNs & 31 & 6.5 & 0.15 = 1/6.7 & 370 & 0.99 & 26\\
+ & 2 AGNs  & 15 & 9.9 & 0.11 = 1/9.1 & 440 & 1.1 & 51\\
+\hline
+beta(1,5) & 17 AGNs & 39 & 15 & 0.52 = 1/1.9 & 710 & 3.4 & 79\\
+ & 2 AGNs  & 32 & 28 & 0.42 = 1/2.4 & 1100 & 4.1 & 180\\
+\hline
+\end{tabular}
+\caption{Overall Bayes factors comparing association models with 17 AGNs or
+2 AGNs to the null isotropic background model, for two different priors for
+$f$}\label{tab:BFtab}
+\label{BFTable}
+\end{table}
+
+%> 1/.11
+%[1] 9.09091
+%> 1/.15
+%[1] 6.666667
+
+\mnote{Figure \& modes corrected; added 95\% regions; revised discussion}
+Marginal posterior distributions for $f$ and for $F_T$ are shown in
+Figure~\ref{fig:posterior}.  For the untuned data, the posterior mode of
+$f$ is 0.051 for $M_1$ (17 AGNs) and 0.047 for $M_2$ (2 AGNs);
+the 95\% highest density credible intervals for $f$ are $[0, 0.23]$
+and $[0.002, 0.145]$, respectively.  Using all of the data, the
+distributions shift to somewhat larger values of $f$; the
+posterior mode of $f$ is 0.11 for $M_1$ and 0.08 for $M_2$, and $f=0$
+has a significantly smaller density.  However, the uncertainties are
+large enough that the $f$ estimates are consistent with each other.  The
+posterior distributions for $F_T$ are very similar in all models.  The
+peaks are a little higher and the widths of the peaks are smaller when
+we consider the cosmic rays from periods 1--3, as expected, since we
+have more data.  The posterior modes correspond to total fluxes of about
+0.04 km$^{-2}$ yr$^{-1}$ in all cases.
+
+\begin{figure}
+\centerline{$
+\begin{array}{cc}
+\includegraphics[angle=-90,width=.5\textwidth]{posterior_f_all_margOverKappa.eps} &
+\includegraphics[angle=-90,width=.5\textwidth]{posterior_FT_all_margOverKappa.eps}
+\end{array}$}
+\caption{Marginal posterior distributions for $f$ (the fraction of
+UHECRs associated with AGNs in candidate catalogs), and $F_T$ (the total
+flux), considering UHECR data from different periods, and models
+associating UHECRs with either 2 or 17 nearby AGN.}
+\label{fig:posterior}
+\end{figure}
+
+
+%\begin{figure}
+%\centerline{$
+%\begin{array}{cc}
+%\includegraphics[width=1.75in,angle=-90]{posterior_F_margOverKappa_17AGNs.eps} &
+%\includegraphics[width=1.75in,angle=-90]{posterior_F_margOverKappa_2AGNs.eps}
+%\end{array}$}
+%\caption{50\%, 68\% and 95\% credible regions from joint posteriors for $(F_0,F_A)$ for 17-AGN %model (left) and 2-AGN model (right)}
+%\label{fig:jointF}
+%\end{figure}

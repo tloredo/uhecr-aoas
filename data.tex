@@ -1,0 +1,303 @@
+\section{Description of cosmic ray and candidate host data}
+
+%..............................................................................
+\subsection{Cosmic ray data}
+\label{sec:data}
+
+As is generally true for a complicated particle physics experiment, the
+reported PAO measurements depend not only on the intrinsic particle
+population but also on many experimental and algorithmic choices in the
+detection and analysis chain, many of them associated with the need to
+distinguish between events of interest and background events from uninteresting
+but uncontrollable sources (e.g., natural radioactivity).  UHECRs can
+impinge on the observatory at any time, from any direction and with any
+energy.
+One important simplification, however, is that virtually no background sources
+produce events with properties mimicking those of very high energy cosmic rays
+arriving from directions well above the horizon.
+Cosmic rays with $E>3$~EeV arriving from any direction lying within a large
+window on the sky create air showers detected with nearly 100\% efficiency
+(no false positives, no false dismissals).  The SDs and FDs measure
+the spatio-temporal development of the air shower which, in turn, allows
+the energy and arrival direction to be measured.  The uncertainties depend
+upon how many counters of each type are triggered plus the systematic and
+statistical uncertainties implicit in modeling  the development of the
+air shower. The PAO team analyzes the detector data and reports energy and
+arrival direction estimates for each cosmic ray falling within the geometric
+bounds of its zone of secure detection.\footnote{The directional criterion
+adopted for the PAO catalogs is that an event is reported if it best-fit
+arrival direction is within $60^\circ$ of the observatory's zenith, the
+local normal to Earth's surface at the time of the event.}
+
+We consider the $N_C = 69$ UHECRs with energies $E \geq 55$~EeV cataloged in
+PAO-10, which reports measurements of all UHECRs seen by PAO through 31
+December 2009 with $E \geq \Eth$, based on analysis of the surface detector
+data only.  Although our framework does not tune an event selection
+criterion, for interpreting the results it is important to remember that the
+$\Eth=55$~EeV threshold value was set to maximize a signature of anisotropy
+in an early subset of the data. 
+The tuning data included the 14 earliest
+reported events, detected from 1~January 2004 to 26~May 2006 (inclusive;
+Period~1), as well as numerous unreported events with $E<\Eth$.  The first
+published catalog in PAO-08 included 13 subsequent UHECRs observed through 31
+August 2007 (Period~2).  The PAO-10 catalog includes 42 additional UHECRs
+observed through 31 December 2009 (Period~3). Table~1 in PAO-10 provides
+information about the three periods, including the sky exposure for each
+period, which is not simply proportional to duration (the observatory grew in
+size considerably through 2008).  Data for cosmic rays with $E < \Eth$ are not
+publicly available.\footnote{The PAO web site hosts public data for 1\% of
+lower-energy cosmic rays, but the sample is not statistically characterized
+and UHECRs are not included.}
+
+The direction estimate for a particular cosmic ray is the result of a
+complicated analysis of time series data from the array of PAO surface
+detectors.\footnote{The SD data may be supplemented by data from the
+fluorescence detectors for hybrid events observed under favorable
+conditions, but there are very few such events at ultra-high energies,
+and PAO-10 reports analysis of SD data only.}
+Roughly speaking, the direction is inferred by triangulation. 
+The analysis produces a likelihood function for the cosmic ray arrival
+direction, $\omega$ (a unit vector on the celestial sphere).  The detailed
+shape of the likelihood contours is not simple (some contours are shown at
+the PAO web site for lower-energy events), but they are roughly azimuthally
+symmetric about the best-fit direction.  The PAO-10 catalog summarizes the
+likelihood function with a best-fit direction, and a typical directional
+uncertainty of $\approx 0.9^\circ$ corresponding to the angular radius of an
+azimuthally symmetric 68.3\% confidence region.  We use these summaries to
+approximate the likelihood functions with a Fisher distribution with mode at
+the best-fit direction for each cosmic ray, and with concentration parameter
+$\kappa_c = 9323$, corresponding to a 68.3\% confidence region with an
+angular radius of 0.9$^\circ$.  Let $d_i$ denote the data associated with
+cosmic ray $i$, and $\omega_i$ denote its actual arrival direction.  The
+likelihood function for the direction is
+\ba
+\ell(\omega_i)
+  \coloneqq P(d_i|\omega_i)
+   \approx \frac{\kappa_c}{4\pi\sinh(\kappa_c)} \exp(\kappa_c n_i\cdot\omega_i),
+\label{ell-def}
+\ea
+where $n_i$ denotes the best-fit direction for cosmic ray $i$, and we have
+scaled the likelihood function so its integral over $\omega_i$ is unity,
+merely as a convenient convention.  Bonifazi et al.\
+\cite{B+PAO09-DrxnUncert} provide more information about the PAO direction
+measurement capability.  Note that the expected angular scale of magnetic
+deflection is larger than the PAO directional uncertainties, significantly
+so if UHECRs are heavy nuclei (see \S~\ref{sec:dflxn}).
+
+Similarly, the analysis pipeline produces energy estimates for each event.
+These estimates have significant random and systematic uncertainties.
+The PAO-10 catalog reports a best-fit energy for each reported event,
+with a typical energy resolution of $\approx 15$\% \cite{PAO10-GZK}.
+This uncertainty is the random uncertainty in estimates based on surface
+detector data.\footnote{For hybrid events, the uncertainty can be better than
+6\%.  The percentages indicate the sizes of the root-mean-square errors of
+energy estimates in calibration experiments; the errors appear approximately
+normally distributed and have some dependence on cosmic ray composition
+\cite{PAO08-GZK}.}
+The energy scale of UHECRs is so far beyond the scales of easily measured
+natural phenomena that an accurate absolute energy calibration for UHECRs
+requires significant extrapolation of particle physics theory to regimes not
+explored directly by experiment, and this is a significant source of
+systematic (correlated) uncertainty in the measured energies.  A key feature
+of PAO is the presence of both surface and fluorescence detectors at the same
+site; this enables a more secure calibration than was possible for earlier
+experiments that relied on a single type of detector.  Analysis and modeling
+of FD data produces energy estimates with an absolute energy scale systematic
+uncertainty of 22\%.  The absolute energy scale for the SD analysis is calibrated by
+comparison of the SD and FD estimates for hybrid events, and the resulting
+systematic uncertainty in the SD energy scale with respect to the FD scale is
+$\approx 10$\%.
+
+The models we study here do not make use of the reported energies and are
+unaffected by these uncertainties.  But our framework readily generalizes to
+account for energy dependence.  In principle it is straightforward to account
+for the random uncertainties, but a consistent treatment requires data for
+events below any imposed threshold:  the true energies of events with best-fit
+energies below threshold could be above threshold (and vice versa for those
+with best-fit energies above threshold); accounting for this requires data to
+energies below astrophysically important thresholds.  The systematic
+uncertainties become important for joint analyses of PAO data with data from
+other experiments, and for linking results of spectral analyses to particle
+physics theory.
+
+
+%..............................................................................
+\subsection{Candidate source catalog}
+
+As candidate sources for the PAO UHECRs, the analysis reported in PAO-07 and
+PAO-08, and several subsequent analyses, considered 694 
+AGN within $\approx 75$~Mpc from the 12th catalog 
+assembled by V\'eron-Cetty and V\'eron \cite{VCV-12thAGNCat} (VCV). 
+This catalog includes data on all AGN and quasars (AGN with star-like
+images) with published spectroscopic redshifts; it includes observations
+from numerous investigators using diverse equipment and AGN selection
+methods, and does not represent a statistically well-characterized sample of
+AGN.\footnote{VCV say of the catalog, ``This catalogue should not be used
+for any statistical analysis as it is not complete in any sense, except that
+it is, we hope, a complete survey of the literature.''}
+Subsequent analyses in PAO-10, and a few other analyses, used more recent
+catalogs of active galaxies or normal galaxies, including flux-limited
+catalogs (i.e., well-characterized catalogs that contain all bright sources
+within a specified volume, but dimmer sources only in progressively smaller
+volumes).
+
+%As noted above, the Greisen-Zatsepin-Kuzmin (GZK) limit implies that cosmic
+%rays with energies $\gtrsim$ 50~Eev should interact with cosmic microwave
+%background photons and should almost never reach the earth from distance
+%longer than 50~Mpc.
+
+For the representative analyses reported here, we consider the 17 AGN
+cataloged by Goulding et al.\cite{2010MNRAS.406..597G} (2010; hereafter G10)
+as candidate sources.  This is a well-characterized {\em volume}-limited
+sample; it includes all infrared-bright AGN within 15~Mpc.  
+For each AGN in the calalog, we take its position on the sky, $\varpi_k$
+($k=1$ to $\Nsrc$), and its distance, $D_k$, to be known precisely (galaxy
+directions have negligible uncertainties compared to cosmic ray directions).
+Notably, this catalog includes Centaurus~A (Cen~A), the nearest AGN
+($D\approx 4.0$~Mpc), an unusually active and morphologically peculiar AGN.
+Theorists have hypothesized Cen~A to be a source of many or even most UHECRs
+if UHECRs are heavy nuclei, which would be deflected through large angles;
+see \cite{B+09-CenA,GBdS10-CenA,BdS12-CenA}.  The small size of this catalog
+facilitates thorough exploration of our methodology: Markov chain Monte
+Carlo algorithms can be validated against more straightforward algorithms
+that could not be deployed on large catalogs, and simulation studies are
+feasible that would be too computationally expensive with large catalogs.
+Also, for simple ``standard candle'' models (adopted here and in other
+studies), that assign all sources the same cosmic ray intensity, little is
+gained by considering large catalogs, because assigning detectable cosmic
+ray intensities to distant sources would imply cosmic ray fluxes from nearby
+sources too large to be compatible with the data.
+
+We also include an isotropic background component as a ``zeroth" source.
+This allows a model to assign some UHECRs to sources not included in the AGN
+catalog (either galaxies not cataloged, or other, unobserved sources). In
+addition, we consider an isotropic source distribution for {\em all} cosmic
+rays (i.e., a model with only the zeroth source) as a ``null'' model for
+comparison with models that associate some cosmic rays with AGN or other
+discrete sources.  An isotropic distribution is convenient for calculations
+and has been adopted as a null hypothesis in several previous studies. 
+Historically, before PAO's convincing observation of a GZK-like cutoff in
+the UHECR energy spectrum, the isotropic distribution was meant to represent
+a distant cosmological origin for UHECRs.  Accepting the null would indicate
+that the GZK prediction was incorrect, and that changes in fundamental
+physics would be required to explain UHECRs.  In light of PAO's compelling
+observation of a GZK-like cutoff (with its implied $\sim 100$~Mpc distance
+scale), interpreting an isotropic null or background component is
+problematical if there are many light nuclei among the UHECRs.  We adopt it
+here both for convenience and due to precedent.  We discuss this further
+below.
+
+%..............................................................................
+\subsection{Sky maps}
+
+Figures~\ref{fig:skymap} and \ref{fig:skymaps} show sky maps displaying the
+directions to both the UHECRs seen by PAO, and the AGN in the G10 catalog.
+The directions are shown in an equal-area Hammer-Aitoff projection in
+Galactic coordinates; the Galactic plane is the equator (Galactic latitude
+$b=0^\circ$), and the vertically-oriented grid lines are meridians of
+constant Galactic longitude, $l$.  The star indicates the south celestial
+pole (SCP), the direction directly above Earth's south pole (effects like
+precession and nutation of the Earth's axis are negligible for this
+application and we ignore them in this description).  The thick gray line
+bounds the PAO field of view.  The UHECR and AGN directions are displayed as
+``tissots,'' projections of circular patches centered on the reported
+directions.  The small tissots show the UHECR directions; the tissot size is
+$2^\circ$, corresponding to $\approx 2$ standard deviation errors, and the
+tissot color indicates energy.  The large green tissots indicate AGN
+directions; the tissot size is $5^\circ$, corresponding to a plausible scale
+for magnetic deflection of UHE protons in the Galactic magnetic
+field.\footnote{If UHECRs are comprised of heavier, more positively charged
+nuclei, they could suffer much larger deflections; see \S~\ref{sec:dflxn}.}
+The tissots are rendered with transparency; the two darker tissots near the
+Galactic north pole indicate pairs of AGN with nearly coincident directions.
+Two of the AGN tissots are outlined in solid black; these correspond to the
+two nearest AGN, Centaurus~A (Cen~A, also known as NGC~5128) and NGC~4945,
+neighboring AGN at distances of 4.0 and 3.9~Mpc (as reported in G10).  Five
+others are outlined in dashed black; these have distances ranging from 6.6
+to 10.0~Mpc. The remaining 10 AGN have distances from 11.5 to 15.0~Mpc. 
+Four of the AGN are outside the PAO field of view, but depending on the
+scale of magnetic deflection, they could be sources of observable cosmic
+rays.
+
+\enote{Issue:  EPS files (required by AoAS) do not support transparency,
+so the ``darker tissots'' are not darker, etc..  A rasterized version may
+be too large for arXiv.}
+
+% Advice on rasterizing for arXiv:
+% http://electron.mit.edu/~gsteele/pdf/
+
+\begin{figure}
+\begin{centering}
+\includegraphics[width=\textwidth]{CR+LocalAGN-all.eps}
+\end{centering}
+\caption{Sky map showing directions to 69 UHECRs detected by PAO, and
+to 17 nearby AGN from the catalog of Goulding et al..  Directions are
+shown in an equal-area Hammer-Aitoff projection in Galactic coordinates.
+Thick gray line indicates the boundary of the PAO field of view.
+Small tissots show UHECR directions; tissot radius is $2^\circ$ corresponding
+to $\approx 2$ standard deviation errors; tissot color indicates energy.
+Large green tissots indicate AGN directions; tissot radius is $5^\circ$.
+Thin curves are geodesics connecting each UHECR to its nearest AGN.
+Maps here and in Fig.~\ref{fig:skymaps} show UHECR directions from different
+PAO observing periods, as labeled.}
+\label{fig:skymap}
+\end{figure}
+
+\begin{figure}
+\begin{centering}
+%\includegraphics[angle=-90, width=.8\textwidth]{CR+LocalAGN-1-nobar.eps}\\
+%\includegraphics[angle=-90, width=.8\textwidth]{CR+LocalAGN-2-nobar.eps}\\
+%\includegraphics[angle=-90, width=.8\textwidth]{CR+LocalAGN-3.eps}
+\includegraphics[width=.9\textwidth]{CR+LocalAGN-1-nobar.eps}\\
+\includegraphics[width=.9\textwidth]{CR+LocalAGN-2-nobar.eps}\\
+\includegraphics[width=.9\textwidth]{CR+LocalAGN-3.eps}
+\end{centering}
+\caption{Sky maps showing directions to UHECRs detected by PAO in
+each of three observing periods (as labeled).  Symbols are as in
+Fig.~\ref{fig:skymap}.
+\enote{Revise to omit colorbars.}}
+\label{fig:skymaps}
+\end{figure}
+
+\enote{Move the Fig 2 maps to appendix?}
+
+Figure~\ref{fig:skymap} shows all 69 UHECR directions; the panels in
+figure~\ref{fig:skymaps} show subsets of the UHECRs corresponding to the
+three PAO analysis periods described above.  The thin curves (teal) show
+geodesics connecting each UHECR to its nearest AGN.  In the full-catalog map,
+there is a noticable concentration of cosmic ray directions near the
+directions of Cen~A and NGC~4945; a few other AGN also have conspicuously
+close cosmic rays.  A concentration in the vicinity of the two closest AGN
+is also evident in the maps for periods~1 and 2 (note that the slightly
+extended red tissot near the direction of NGC~4945 corresponds to two nearly
+coincident UHECRs).  Curiously, except for a single UHECR about $6^\circ$
+from NGC~4945, no such concentration is evident in the map for period~3,
+despite it having about three times the number of UHECRs found in earlier
+periods.  This is a presage of results from our quantitative analysis that
+suggest the data may not be consistent with simple models for the cosmic ray
+directions, with or without AGN associations.
+
+%..............................................................................
+\subsection{PAO exposure}
+
+PAO is not equally sensitive to cosmic rays coming from all directions.
+Quantitative assessment of evidence for associations or other anisotropy must
+account for the observatory's direction-dependent exposure.
+
+Let $F$ be the cosmic ray flux at Earth from a source at a given direction,
+$\tdrxn$, i.e., the expected number of cosmic rays per unit time per unit
+area normal to $\tdrxn$.   Then the expected number of rays detected in a
+short time interval $dt$ is $F A_p(t,\tdrxn) dt$, where $A_p(t,\tdrxn)$ is
+the projected area of the observatory toward $\tdrxn$ at time $t$. The total
+expected number of cosmic rays is given by integrating over $t$; it can be
+written as $F\expo(\tdrxn)$, with the {\em exposure map} $\expo(\tdrxn)$
+defined by
+\begin{equation}
+\expo(\tdrxn) \coloneqq \int_T  A_p(\tdrxn,t) dt;
+\label{expo-def-main}
+\end{equation}
+the integral is over the time intervals when the observatory was operating,
+denoted collectively by $T$.
+Supplementary Appendix~\ref{app:expo} describes calculation of
+$\expo(\tdrxn)$; the thick gray curves shown in the sky maps mark the
+boundary of the region of nonzero exposure.

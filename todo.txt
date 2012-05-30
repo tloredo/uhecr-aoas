@@ -1,0 +1,8 @@
+Find a more recent ref than Sommers 2001 on the RA dependence of the
+exposure to add; maybe one of the anisotropy papers
+
+Remove extra colorbars from skymaps; be careful producing EPS as
+transparency is important
+
+Another Bayes benefit:  Combining data from different observatories,
+potentially including accounting for systematic error in the energy scale.

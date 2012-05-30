@@ -1,0 +1,74 @@
+\section{Auger observatory exposure}
+\label{app:expo}
+
+PAO can reliably detect and measure UHECRs arriving from directions within
+$60^\circ$ from the observatory zenith.  Due to Earth's rotation, the zenith
+traces a circular path on the sky, and the PAO field of view changes with time.
+The observatory's geodetic latitude is $-35.5^\circ$, so the field of view
+always includes the SCP and directions within a $5.5^\circ$ cone about it.
+Outside of that cone, the time spent within the field of view decreases with
+increasing latitude, vanishing for northern latitudes above $24.5^\circ$.  This
+boundary corresponds to the thick gray curve shown in the sky maps.
+
+In addition, at a given instant, the projected area of the observatory varies
+with direction.  Since the observatory detects air showers, the effective area
+of the detector toward a particular source direction is the projected area of
+the layer of atmosphere above PAO toward that direction.  Due to Earth's
+rotation, this projected area is a function of time; we denote it by
+$A_p(t,\tdrxn)$ for direction $\tdrxn$ (a unit vector toward a fixed direction
+on the sky) at time $t$.  We account for the zenith angle criterion by
+setting $A_p=0$ for directions outside of the instantaneous field of view.
+
+As described in \S~\ref{sec:data}, the exposure map, $\expo(\tdrxn)$,
+is defined by
+\begin{equation}
+\expo(\tdrxn) \coloneqq \int_T  A_p(\tdrxn,t) dt.
+\label{expo-def}
+\end{equation}
+The projected area can be written as $A_p(\tdrxn,t) = A(t) \mu(\tdrxn,t)$,
+where $A(t)$ is the effective planar area of the detection volume, and
+$\mu(t,\tdrxn)$ is a projection factor.  $A(t)$ varies slowly with time as
+the observatory grows.  The projection factor varies much more quickly, due
+to Earth's rotation. The PAO team has shown that for UHECRs, to a good
+approximation a simple geometric projection varying periodically with a
+period of 1~sidereal day gives a very accurate description of the PAO
+exposure \cite{2001APh....14..271S}. As a result, the time integral in
+equation~(\ref{expo-def}) can be approximated as $\int A(t) m(\tdrxn) dt$,
+where $m(\tdrxn)$ is the geometric projection factor averaged over 1
+sidereal day. The average projection factor is constant with respect to
+right ascension (the equatorial sky coordinate corresponding to geodetic
+longitude) due to rotational averaging.  It varies strongly with declination
+(the equatorial sky coordinate corresponding to geodetic latitude).
+Figure~\ref{fig:pjxn} shows the average projection as a function of
+declination.
+
+\begin{figure}
+\centerline{\includegraphics[width=.8\textwidth]{avg_pjxn_factor.eps}}
+\caption{Average projection factor, $m(\tdrxn)$, describing the declination
+dependence of the PAO exposure map.}
+\label{fig:pjxn}
+\end{figure}
+
+With these approximations, to evaluate $\expo(\tdrxn)$, we need the
+time integral of the observatory area, $A(t)$.  By convention, this
+quantity is reported indirectly by describing the observatory's
+sensitivity to an isotropic distribution of sources (lower-energy cosmic
+rays have an isotropic distribution).  For such a distribution, the expected
+number of rays would be proportional to the {\em total exposure}, the
+integral of the exposure map over the whole sky:
+\begin{equation}
+\alpha_T \coloneqq \int \expo(\tdrxn) d\tdrxn = \int A(t) dt \int m(\tdrxn) d\tdrxn.
+\label{ET-def}
+\end{equation}
+The total exposure has units of area $\times$ time $\times$ solid angle;
+(it has also been called ``aperture,'' as ``exposure'' is more traditionally
+used for quantities with units of area $\times$ time).  The PAO team
+reports $\alpha_T$ for each observing period in PAO-10.
+
+To calculate the exposure map from $\alpha_T$ and $m(\tdrxn)$, define the
+integrated projection factor by $M \coloneqq \int d\tdrxn m(\tdrxn)$ (with
+units of solid angle).  Then the exposure is
+\begin{equation}
+\expo(\tdrxn) = \frac{\alpha_T}{M} m(\tdrxn).
+\label{expo-mET}
+\end{equation}
