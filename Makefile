@@ -1,4 +1,5 @@
-paper=paper
+#paper=paper-arxiv
+paper=paper-aoas
 
 # This uses dvips; PDF figs not supported.
 
@@ -52,6 +53,7 @@ dvi2pdf:  $(paper).tex
 # simpdftexnodel is a version of simpdftex that updates rather than deletes
 # the PDF file, so viewers can refresh rather than reload updated PDF output.
 # See http://phaseportrait.blogspot.com/2007/07/skim-automatic-refreshes-and-simpdftex.html
+
 paper:  $(paper).tex
 	simpdftexnodel latex $(SYNCOPT) $(paper)
 	rm -f head.tmp body.tmp

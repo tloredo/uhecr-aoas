@@ -148,7 +148,6 @@ large energies, which astronomical objects host the accelerators, and what
 sorts of nuclei end up being energized? We develop a multilevel Bayesian
 framework for assessing evidence for association of UHECRs and candidate source
 populations that has four levels:
-\mnote{Revised \& extended abstract}
 (1) a source property description level, including specification of a
 candidate source population and the distribution of cosmic ray
 intensities among sources;
@@ -225,17 +224,58 @@ disclosure of the data.
 %redefinition of \cmdname{enote} in paper.tex to hide them; we'll deal with
 %them later.}
 
-\enote{Added keywords (bottom p~1).}
 
-\input{intro}
+\input{intro-aoas}
 
-\input{data}
+\input{data-aoas}  % omits extra skymaps
 
 \input{modeling}
 
 \input{results}
 
-\input{checking}
+% This is in place of the model checking section, which appears here in
+% the arXiv version:
+
+
+\subsection{Model checking}
+
+\mnote{New subsection; model checking section moved to appendix.}
+In Online Appendix~\ref{app:checking} we describe results of two types of
+tests of our models, motivated by period-to-period variability of some of
+the results reported above.
+
+First, we performed simple change point analyses to see whether the
+period-to-period variation of the Bayes factors for association vs.\ isotropy
+indicates the population-level properties of the detected cosmic rays vary
+from period to period.  We compared versions of $M_1$ and $M_2$ that allow
+model parameters to change between periods to versions that keep the
+parameters the same for all periods.  We find that there is no significant
+evidence for variability of model parameters from period to period.  
+
+%That is, presuming one of the models is adequate, the apparent discrepancy
+%among the Bayes factors in Table~\ref{BFTable} reflects variability that may
+%be expected for these modest sample sizes.
+
+Second, we performed predictive checks to see whether the period-to-period
+Bayes factor variations are surprising in the context of either the null or
+association models, essentially using the Bayes factors as goodness-of-fit
+test statistics.  
+We simulated data from the null (isotropic) model and compared the Bayes
+factors based on the observed data with those found in the simulations; we
+did the same for a representative association model.
+We find that Bayes factors favoring association as large as that
+found with the Period~1 PAO data are unlikely for
+isotropic models.
+This implies the distribution of directions in the Period~1 sample is
+anisotropic, but the calculation does not address whether this may be due to
+tuning or to genuine anisotropy.
+For association models, the large Bayes factors for periods 1 and 2,
+and the small Bayes factor in Period~3, are not individually surprising.
+But it is very surprising to see a combination of large Bayes factors
+for the two small subsamples, and a small Bayes factor for the large
+subsample.  The full dataset thus is not comfortably fit by either
+isotropic or association models.  We discuss this further below.
+
 
 \input{discussion}
 
@@ -251,7 +291,8 @@ disclosure of the data.
 
 \input{app-comparison}
 
-\input{app-chgpt}
+\input{app-checking-aoas}
+
 
 \section*{Acknowledgements}
 This research was supported by the NSF via grants AST-0908439 and DMS-0805975.
