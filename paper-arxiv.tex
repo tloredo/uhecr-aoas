@@ -157,44 +157,39 @@ to model latent properties (arrival times and energies) of cosmic rays;
 cosmic magnetic fields;
 (4) a detection and measurement level, accounting for detector efficiency
 and exposure, and measurement errors in arrival directions and energies.
+\mnote{Altered abstract from here}
 Our framework can flexibly accomodate astrophysical components anywhere on
-a spectrum from simplicity to great complexity and realism.  
-We demonstrate the framework using simple models similar to those
-adopted in previous studies, but our results suggest more complex models
-are likely necessary (we will pursue such models in future work).
+a spectrum from simplicity to great complexity and realism.
+The number of possible associations is huge even for modest-sized datasets. 
+We describe a Markov chain Monte Carlo algorithm for estimating model
+parameters and comparing models by computing, via Chib's method, marginal
+likelihoods and Bayes factors.
 
-The principal obstacle to computing with this framework is the
-combinatorial explosion in the number of possible associations as the
-sizes of the candidate source population and the UHECR sample grow.  We
-present a Markov chain Monte Carlo algorithm for estimating the
-parameters and computing, via Chib's method, the marginal likelihoods
-used in model comparison.  We apply the algorithm to the observations of
-69 UHECRs observed by Pierre Auger Observatory (PAO) during the years
-2004--2009, using a volume-complete catalog of 17 nearby active galactic
-nuclei as a candidate host population.
-The reported data are incomplete; an early portion of the data
-(``Period~1'') was used to set an energy cut maximizing a measure of
-anisotropy in that data; only data for cosmic rays with energies above
-that cut is reported, in Period~1 (14 events) and subsequently.  Also,
+We demonstrate the framework by using simple model components to analyze
+observations of 69 UHECRs by the Pierre Auger Observatory (PAO) during the
+years 2004--2009, using a volume-complete catalog of 17 nearby active
+galactic nuclei as a candidate host population. The reported data are
+incomplete; an early portion of the data (``Period~1,'' with 14 events) was
+used to set an energy cut maximizing a measure of anisotropy in that data;
+only data for cosmic rays with energies above that cut are reported.  Also,
 measurement errors are approximately summarized.  These factors are
 problematic for independent analyses of PAO data.  Within the context of
 ``standard candle'' source models (all sources with the same isotropic
-cosmic ray emission rate), there is no significant evidence favoring
-association of UHECRs with nearby AGN vs.\ attributing them to sources
-drawn from an isotropic background distribution, when we analyze the
-untuned data subsequent to Period~1; the highest-probability
-associations are with the two nearest AGN, Centaurus~A and its neighbor,
-NGC~4945.  If the association model is adopted, the fraction of UHECRs
-that may be associated is likely nonzero but is constrained to be well
-below 50\%.  Relatively small magnetic deflection angular scales of
-$\approx 3^\circ$ to $20^\circ$ are favored; models that assign a large
-fraction of UHECRs to a single nearby source are ruled out unless very
-large deflection scales are specified a priori, and even then they are
-disfavored.  However, including the Period~1 data alters the conclusions
-significantly, and a simulation study supports the idea that the
-Period~1 data are anomalous, presumably due to the tuning.  Accurate and
-optimal analysis of future data will likely require more complete
-disclosure of the data.
+cosmic ray emission rate), and considering only the untuned data subsequent
+to Period~1, there is no significant evidence favoring association of UHECRs
+with nearby AGN vs.\ attributing them to sources drawn from an isotropic
+background distribution.  The highest-probability associations are with the
+two nearest AGN, Centaurus~A and its neighbor, NGC~4945.  If the association
+model is adopted, the fraction of UHECRs that may be associated is likely
+nonzero but is constrained to be well below 50\%.  Relatively small magnetic
+deflection angular scales of $\approx 3^\circ$ to $20^\circ$ are favored;
+models that assign a large fraction of UHECRs to a single nearby source are
+ruled out unless very large deflection scales are specified a priori, and
+even then they are disfavored.  However, including the Period~1 data alters
+the conclusions significantly, and a simulation study supports the idea that
+the Period~1 data are anomalous, presumably due to the tuning.  Accurate and
+optimal analysis of future data will likely require more complete disclosure
+of the data.
 \end{abstract}
 
 
