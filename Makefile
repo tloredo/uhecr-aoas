@@ -76,3 +76,19 @@ clean:
 	rm -f $(paper).nav $(paper).out $(paper).snm $(paper).toc \
 	   $(paper).aux $(paper).dvi $(paper).log $(paper).synctex.gz \
 	   $(paper).spl p.ps
+
+# Bundling targets:
+#
+# The file lists are partly found using tex_file_list.py.
+
+ARXIV_FIGS = CR+LocalAGN-all.eps CR+LocalAGN-1-nobar.eps CR+LocalAGN-2-nobar.eps CR+LocalAGN-3.eps CRCoincLevels.eps BF_kappa_17AGNs_1+2.eps postf.eps kappa_f-log_kappa.eps posterior_f_all_margOverKappa.eps posterior_FT_all_margOverKappa.eps BF_cumplot_genUnif_14CRs_logscale.eps BFCumplot-AssocnSimn.eps avg_pjxn_factor.eps BF-CenAvsIsotropic-SmallKappa.eps margf_kappa1000_17AGNs.eps BF_changepoint_17AGNs.eps BF_changepoint_2AGNs.eps
+ARXIV_INPUTS = intro-arxiv.tex data-arxiv.tex modeling.tex results.tex checking-arxiv.tex discussion.tex app-exposure.tex app-like.tex app-computation.tex app-CenA.tex app-comparison.tex app-chgpt-arxiv.tex
+
+arxiv:
+	tar czf arxiv.tgz paper-arxiv.tex paper-arxiv.bbl imsart.sty imsart.cls $(ARXIV_INPUTS) $(ARXIV_FIGS)
+
+AOAS_FIGS = CR+LocalAGN-all.eps CRCoincLevels.eps BF_kappa_17AGNs_1+2.eps postf.eps kappa_f-log_kappa.eps posterior_f_all_margOverKappa.eps posterior_FT_all_margOverKappa.eps avg_pjxn_factor.eps BF-CenAvsIsotropic-SmallKappa.eps margf_kappa1000_17AGNs.eps BF_changepoint_17AGNs.eps BF_changepoint_2AGNs.eps BF_cumplot_genUnif_14CRs_logscale.eps BFCumplot-AssocnSimn.eps
+AOAS_INPUTS = intro-aoas.tex data-aoas.tex modeling.tex results.tex discussion.tex app-exposure.tex app-like.tex app-computation.tex app-CenA.tex app-comparison.tex app-checking-aoas.tex
+
+aoas:
+	tar czf aoas.tgz paper-aoas.tex paper-aoas.bbl imsart.sty imsart.cls $(AOAS_INPUTS) $(AOAS_FIGS)
