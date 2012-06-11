@@ -6,16 +6,22 @@
 \subsection{Algorithm for Markov Chain Monte Carlo}
 \label{sec:MCMC}
 
+\mnote{Clarifications, mostly for arXiv readers}
 To draw posterior samples, we perform Metropolis-within-Gibbs sampling on
-parameters $f,F_T$ and $\lambda$.  The full conditionals may be derived from 
-(\ref{eq:lik}) and the $(F_T,f)$ priors.  The conditional for the total flux is
+parameters $f,F_T$ and $\lambda$, using Gibbs sampling for $F_T$ and
+$\lambda$, and Metropolis sampling for $f$.  The Gibbs sampling steps
+alternate between sampling from the full conditional distribution for $F_T$
+(i.e., the distribution given the data and all other parameters), and that for
+$\lambda$.  The full conditionals may be derived from (\ref{eq:like}) and the
+$(F_T,f)$ priors.  The conditional for the total flux is
 \be
-F_T|f,\lambda \sim 
+F_T|f,\lambda,D \sim 
   \text{Gamma}\left(N_C+1,
     \frac{1}{\frac{1}{s}+(1-f)\epsilon_0+f\sum_{k\geq 1}w_k\epsilon_k}\right),
 \ee
 where $\text{Gamma}(\alpha,s)$ denotes the gamma distribution with shape
-parameter $\alpha$ and scale parameter $s$.  The conditional for the
+parameter $\alpha$ and scale parameter $s$.  (Note that this distribution
+happens to be independent of $\lambda$.)  The conditional for the
 cosmic ray labels is a multinomial distribution with probabilities
 \be
 P(\lambda_i|F_T,f,D)
@@ -27,7 +33,7 @@ P(\lambda_i|F_T,f,D)
 \ee
 Finally, the conditional for the associated fraction is
 \ba \quad
-\left[f|\lambda,F_T,D\right]
+P(f|\lambda,F_T,D)
   &\propto& \exp\left\{-F_T\left[(1-f)\epsilon_0+f\sum_{k\geq1}\epsilon_k w_k\right]\right\}\nonumber \\
   & & \times (1-f)^{m_0(\lambda)+b-1}f^{N_C-m_0(\lambda)+a-1}.
 \ea
