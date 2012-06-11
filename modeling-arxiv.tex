@@ -143,17 +143,18 @@ background population.
 A model must specify a distribution for $\{F_k\} = \{F_0, \Fvec\}$; in
 astronomical lingo, this corresponds to specifying a ``luminosity function''
 for the background and source populations.  As a simple starting point, we
-treat $F_0$ as a free parameter, and adopt
-a ``standard candle'' model specifying the $N_A$ candidate host fluxes, $\Fvec$,
-via a single parameter as follows.  We assume all sources emit isotropically
-with the same intensity, $I$ (number of cosmic rays per unit time), so the
-flux from a source can be written as $F_k = I/D_k^2$ (the inverse-square
-law), with $D_k$ the (known) distance to source $k$ (there could also be
-distance- and energy-dependent attenuation due to cosmic ray-photon
-interactions, but the sources we consider here are close enough that such
-attenuation should be negligible).  The total flux from the sources is $F_A
-= \sum_k F_k$, and we adopt $F_A$ as the source intensity parameter rather
-than $I$.  Thus $F_k = w_k F_A$, with the weights $w_k$ given by
+treat $F_0$ as a free parameter, and adopt a ``standard candle'' model
+specifying the $N_A$ candidate host fluxes, $\Fvec$, via a single parameter
+as follows.  We assume all sources emit isotropically with the same
+intensity, $I$ (number of cosmic rays per unit time), so the flux from a
+source (i.e., $F_k$ for $k>0$) can be written as $F_k = I/D_k^2$ (the
+inverse-square law), with $D_k$ the (known) distance to source $k$ (there
+could also be distance- and energy-dependent attenuation due to cosmic
+ray-photon interactions, but the sources we consider here are close enough
+that such attenuation should be negligible).  The total flux from the
+sources is $F_A = \sum_{k>0} F_k$, and we adopt $F_A$ as the source
+intensity parameter rather than $I$.  Thus $F_k = w_k F_A$, with the weights
+$w_k$ given by
 \be
 w_k = \frac{1/D_k^2}{\sum_{j=1}^{N_A} 1/D_j^2},
 \label{wt-def}
@@ -220,14 +221,14 @@ skews the prior downward, increasing the probability that $f$ is close to 0.
 Given the fluxes, we model cosmic ray arrival times with a superposition of
 homogeneous Poisson point processes from each component.  Besides its
 arrival time, each cosmic ray has a label associated with it, identifying
-its source component. Let $\tlabel_i$ be an integer-valued latent label for
-UHECR $i$, specifying its source ($\tlabel_i = 0$ for the background, or
-$k \ge 1$ for AGN $k$).  Since a superposition of Poisson processes is a
-Poisson process, we may consider the arrival times to come from a total
-event rate process, and the labels to come from a categorical mark
-distribution with probability mass function
+its source component. Let $\tlabel$ be an integer-valued latent label for a
+UHECR, specifying its source ($\tlabel = 0$ for the background, or $k \ge 1$
+for AGN $k$).  Since a superposition of Poisson processes is a Poisson
+process, we may consider the arrival times for the UHECRs arriving at Earth
+to come from a total event rate process, and the labels to come from a
+categorical mark distribution with probability mass function
 \be
-P(\lambda_i=k|F_0,\Fvec) = \frac{F_k}{\sum_{j=0}^{N_A} F_j}.
+P(\lambda=k|F_0,\Fvec) = \frac{F_k}{\sum_{j=0}^{N_A} F_j}.
 \label{label-pmf}
 \ee
 In the absence of magnetic deflection, the labels could be replaced by
@@ -447,7 +448,7 @@ with adjustments due to the mark distribution and measurement errors.
 
 If the label and arrival direction for detected cosmic ray $i$ were known, the
 factor in the likelihood function associated with that cosmic ray would be
-$F_k A_p(t_i, \tdrxn_i) \delta t$, where $k=\lambda_i$.
+$F_k \Aperp(\tdrxn_i, t_i) \delta t$, where $k=\lambda_i$.
 In reality, both the label and the arrival direction are uncertain; the PAO
 analysis pipeline produces a likelihood function for the direction to the
 cosmic ray, $\ell_i(\tdrxn_i)$; see equation~(\ref{ell-def}).
@@ -458,7 +459,7 @@ $i$ when assigned to source $k$ may be calculated by marginalizing; it may
 be written as $F_k f_{k,i}\delta t$, with
 \be
 f_{k,i}(\kappa) =
-  \int d\omega_i \ell_i\left(\omega_i\right) A_p(t_i,\omega_i)
+  \int d\omega_i \ell_i\left(\omega_i\right) \Aperp(\omega_i, t_i)
   \rho_k(\omega_i|\kappa).
 \label{f-def}
 \ee
@@ -483,8 +484,9 @@ UHECR $i$.  The integral can be computed analytically;
 \end{cases}
 \label{f-approx}
 \ea
-The total event rate for cosmic rays resembling detected ray $i$ combines
-the contributions from each potential source, i.e.,
+The total event rate for cosmic rays with the properties (direction, energy,
+and arrival time) of detected ray $i$ combines the contributions from each
+potential source, i.e.,
 $r(t_i) = \sum_k F_k f_{k,i}(\kappa)$.
 
 To calculate the expected number factor in the likelihood, we must account
