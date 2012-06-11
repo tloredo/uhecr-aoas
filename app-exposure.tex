@@ -15,17 +15,17 @@ with direction.  Since the observatory detects air showers, the effective area
 of the detector toward a particular source direction is the projected area of
 the layer of atmosphere above PAO toward that direction.  Due to Earth's
 rotation, this projected area is a function of time; we denote it by
-$A_p(t,\tdrxn)$ for direction $\tdrxn$ (a unit vector toward a fixed direction
+$\Aperp(t,\tdrxn)$ for direction $\tdrxn$ (a unit vector toward a fixed direction
 on the sky) at time $t$.  We account for the zenith angle criterion by
-setting $A_p=0$ for directions outside of the instantaneous field of view.
+setting $\Aperp=0$ for directions outside of the instantaneous field of view.
 
 As described in \S~\ref{sec:data}, the exposure map, $\expo(\tdrxn)$,
 is defined by
 \begin{equation}
-\expo(\tdrxn) \coloneqq \int_T  A_p(\tdrxn,t) dt.
+\expo(\tdrxn) \coloneqq \int_T  \Aperp(\tdrxn,t) dt.
 \label{expo-def}
 \end{equation}
-The projected area can be written as $A_p(\tdrxn,t) = A(t) \mu(\tdrxn,t)$,
+The projected area can be written as $\Aperp(\tdrxn,t) = A(t) \mu(\tdrxn,t)$,
 where $A(t)$ is the effective planar area of the detection volume, and
 $\mu(t,\tdrxn)$ is a projection factor.  $A(t)$ varies slowly with time as
 the observatory grows.  The projection factor varies much more quickly, due

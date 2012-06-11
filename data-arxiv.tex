@@ -277,13 +277,13 @@ account for the observatory's direction-dependent exposure.
 Let $F$ be the cosmic ray flux at Earth from a source at a given direction,
 $\tdrxn$, i.e., the expected number of cosmic rays per unit time per unit
 area normal to $\tdrxn$.   Then the expected number of rays detected in a
-short time interval $dt$ is $F A_p(t,\tdrxn) dt$, where $A_p(t,\tdrxn)$ is
+short time interval $dt$ is $F \Aperp(t,\tdrxn) dt$, where $\Aperp(t,\tdrxn)$ is
 the projected area of the observatory toward $\tdrxn$ at time $t$. The total
 expected number of cosmic rays is given by integrating over $t$; it can be
 written as $F\expo(\tdrxn)$, with the {\em exposure map} $\expo(\tdrxn)$
 defined by
 \begin{equation}
-\expo(\tdrxn) \coloneqq \int_T  A_p(\tdrxn,t) dt;
+\expo(\tdrxn) \coloneqq \int_T  \Aperp(\tdrxn,t) dt;
 \label{expo-def-main}
 \end{equation}
 the integral is over the time intervals when the observatory was operating,
