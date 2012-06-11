@@ -489,7 +489,7 @@ and arrival time) of detected ray $i$ combines the contributions from each
 potential source, i.e.,
 $r(t_i) = \sum_k F_k f_{k,i}(\kappa)$.
 
-To calculate the expected number factor in the likelihood, we must account
+To calculate $N_{\rm exp}$, we must account
 for the observatory's exposure map.  The effective exposure given to cosmic
 rays from source $k$ throughout the time of the survey depends, not just on
 the direction to the source, but also on the deflection distribution,
@@ -507,10 +507,9 @@ Supplementary Appendix~\ref{app:expo}, $\epsilon_0 = \alpha_T/4\pi$).
 To find the total expected number of detected cosmic rays we sum over
 sources: $N_{\rm exp} = \sum_{k \ge 0} F_k \epsilon_k(\kappa)$.
 
-An implication of the source-dependent exposure is that the prior probability
-mass function for the label of a {\em detected} cosmic ray is not given by
-(\ref{label-pmf}); the terms must be weighted according to the source
-exposures.  The result is
+The prior probability mass function for the label of a {\em detected} cosmic
+ray is not given by (\ref{label-pmf}); the terms must be weighted according to
+the source exposures.  The result is
 \be
 P(\lambda_i=k|F_0,\Fvec,\kappa) =
   \frac{F_k\epsilon_k(\kappa)}{\sum_{j=0}^{N_A} F_j\epsilon_j(\kappa)}.
@@ -554,11 +553,11 @@ Rewriting the previous expression with $(F_T,f)$ in place of $(F_0,F_A)$,
 and using $F_k = w_kF_A = f w_k F_T$ (for $k\ge 1$), we can rewrite
 $\like(F_0,\Fvec,\kappa)$ as
 \ba
+\label{eq:like}
 \like(f,F_T,\kappa) 
   &=& \sum_\lambda (1-f)^{m_0(\lambda)} f^{N_C-m_0(\lambda)} F_T^{N_C}\\
   && \times e^{-F_T\left[(1-f)\epsilon_0+f\sum_{k\geq 1} w_k\epsilon_k \right]}
      \prod_{k\geq 1} w_k^{m_k(\lambda)} \prod_i f_{\lambda_i,i}.\nonumber
-\label{eq:lik}
 \ea
 
 For computations it will be helpful to have the likelihood function
@@ -582,7 +581,7 @@ equation~(\ref{like-assoc}).
 
 To estimate the deflection parameter, $\kappa$, we need the marginal
 likelihood $\like_m(\kappa) = P(D|\kappa) = \int dF_T\int df
-P(D,F_T,f|\kappa)$.  The integrand is the product of equation~(\ref{eq:lik})
+P(D,F_T,f|\kappa)$.  The integrand is the product of equation~(\ref{eq:like})
 and the flux priors.  Using the exponential and beta priors described above,
 we have that the marginal likelihood for $\kappa$ is
 \ba
