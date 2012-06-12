@@ -503,7 +503,7 @@ precisely from the source direction.  The exposure factor for source $k$ is
 Note that $\epsilon_k$ has units of area $\times$ time, and for the
 isotropic background component ($k=0$), $\epsilon_0(\kappa)$ is a constant
 equal to the sky-averaged exposure (in the notation of
-Supplementary Appendix~\ref{app:expo}, $\epsilon_0 = \alpha_T/4\pi$).
+the \ref{supp}, $\epsilon_0 = \alpha_T/4\pi$).
 To find the total expected number of detected cosmic rays we sum over
 sources: $N_{\rm exp} = \sum_{k \ge 0} F_k \epsilon_k(\kappa)$.
 
@@ -594,9 +594,9 @@ we have that the marginal likelihood for $\kappa$ is
 \label{eq:marg}
 \ea
 Computing $\like_m(\kappa)$ requires summing over all possible values of
-$\lambda$ which is intractable in practice.  In Supplementary
-Appendix~\ref{sec:Chib}, we describe how to use Chib's method
-\cite{MR1379473} to calculate this marginal likelihood.
+$\lambda$ which is intractable in practice.  In the \ref{supp}, we
+describe how to use Chib's method \cite{MR1379473} to calculate this
+marginal likelihood.
 
 %..............................................................................
 \subsection{Model Comparison}
@@ -670,8 +670,8 @@ closed-form expressions for their conditional distributions.  These features
 enable us to use Gibbs sampling techniques well known in mixture modeling
 for sampling the $F_T$ and $\lambda$ parameters.  We handle the $f$
 parameter using a random walk Metropolis algorithm, so our overall algorithm
-is a Metropolis-within-Gibbs algorithm.  Supplementary
-Appendix~\ref{app:compn} provides details on its implementation.
+is a Metropolis-within-Gibbs algorithm.  The \ref{supp} provides details on
+its implementation.
 
 We treat the deflection parameter, $\kappa$, specially, considering
 a logarithmically-spaced grid of values that we condition on.  We
@@ -691,4 +691,4 @@ performed poorly, often apparently converging to an incorrect result (such
 behavior is not unexpected; see \cite{WS12-HMBad}).  Importance sampling
 proved inefficient.  Chib's method was both accurate and efficient in these
 trial calculations, and became our choice for the final implementation.
-Supplementary Appendix~\ref{app:compn} provides details.
+The \ref{supp} provides details.

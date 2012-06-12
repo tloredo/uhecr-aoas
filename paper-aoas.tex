@@ -37,17 +37,8 @@
 
 % Macro for an "editorial note"; uncomment the 2nd definition to
 % produce a version without notes (put it in main doc if desired).
-
-
-
-
 \newcommand\enote[1]{{$\bullet\bullet\bullet$}{\sl [#1]}{$\bullet\bullet\bullet$}}
-
 %\renewcommand\enote[1]{\relax}
-
-
-
-
 
 % Marginal note (just a redef of \marginpar or \marginparodd).
 % Uncomment the 2nd definition to produce a version without notes (put it
@@ -124,10 +115,10 @@ Propagation and Detection of Ultra High Energy Cosmic Rays}
 
 \author{\fnms{Kunlaya} \snm{Soiaporn}\corref{}\ead[label=e1]{ks354@cornell.edu}},
 \address{\printead{e1}}
-\author{\fnms{Thomas} \snm{Loredo}\ead[label=e2]{loredo@astro.cornell.edu}},
-\address{\printead{e2}}
 \author{\fnms{David} \snm{Chernoff}\ead[label=e3]{cheroff@astro.cornell.edu}},
 \address{\printead{e3}}
+\author{\fnms{Thomas} \snm{Loredo}\ead[label=e2]{loredo@astro.cornell.edu}},
+\address{\printead{e2}}
 \author{\fnms{David} \snm{Ruppert}\ead[label=e4]{dr24@cornell.edu}}
 \address{\printead{e4}}
 \and
@@ -169,7 +160,7 @@ likelihoods and Bayes factors.
 We demonstrate the framework by using simple model components to analyze
 observations of 69 UHECRs by the Pierre Auger Observatory (PAO) during the
 years 2004--2009, using a volume-complete catalog of 17 nearby active
-galactic nuclei as a candidate host population. The reported data are
+galactic nuclei as a candidate host population.  The reported data are
 incomplete; an early portion of the data (``Period~1,'' with 14 events) was
 used to set an energy cut maximizing a measure of anisotropy in that data;
 only data for cosmic rays with energies above that cut are reported.  Also,
@@ -183,14 +174,14 @@ background distribution.  The highest-probability associations are with the
 two nearest AGN, Centaurus~A and its neighbor, NGC~4945.  If the association
 model is adopted, the fraction of UHECRs that may be associated is likely
 nonzero but is constrained to be well below 50\%.  Relatively modest magnetic
-deflection angular scales of $\approx 3^\circ$ to $30^\circ$ are favored;
-models that assign a large fraction of UHECRs to a single nearby source are
-ruled out unless very large deflection scales are specified a priori, and
-even then they are disfavored.  However, including the Period~1 data alters
-the conclusions significantly, and a simulation study supports the idea that
-the Period~1 data are anomalous, presumably due to the tuning.  Accurate and
-optimal analysis of future data will likely require more complete disclosure
-of the data.
+deflection angular scales of $\approx 3^\circ$ to $30^\circ$ are favored.
+Models that assign a large fraction of UHECRs to a single nearby source
+(e.g., Centaurus~A) are ruled out unless very large deflection scales are
+specified a priori, and even then they are disfavored.  However, including
+the Period~1 data alters the conclusions significantly, and a simulation
+study supports the idea that the Period~1 data are anomalous, presumably due
+to the tuning.  Accurate and optimal analysis of future data will likely
+require more complete disclosure of the data.
 \end{abstract}
 
 
@@ -227,7 +218,7 @@ of the data.
 
 \input{modeling-aoas}
 
-\input{results}
+\input{results-aoas}
 
 % This is in place of the model checking section, which appears here in
 % the arXiv version:
@@ -236,7 +227,7 @@ of the data.
 \subsection{Model checking}
 
 \mnote{New subsection; model checking section moved to appendix.}
-In Online Appendix~\ref{app:checking} we describe results of two types of
+In the \ref{supp} we describe results of two types of
 tests of our models, motivated by period-to-period variability of some of
 the results reported above.
 
@@ -275,34 +266,37 @@ isotropic or association models.  We discuss this further below.
 
 \input{discussion}
 
-\appendix
-
-\input{app-exposure}
-
-% \input{app-like}
-
-\input{app-computation}
-
-\input{app-CenA}
-
-\input{app-comparison}
-
-\input{app-checking-aoas}
+% These are in the Supp:
+%\appendix
+%\input{app-exposure}
+%  % \input{app-like}
+%\input{app-computation}
+%\input{app-CenA}
+%\input{app-comparison}
+%\input{app-checking-aoas}
 
 
 \section*{Acknowledgements}
 This research was supported by the NSF via grants AST-0908439 and DMS-0805975.
 We are grateful to Paul Sommers for helpful conversations about the
-PAO instrumentation and data reduction and analysis process.
+PAO instrumentation and data reduction and analysis processes.
 
 % Descriptions of online supplements go here:
 
-%\begin{supplement}[id=suppA]
-%  \sname{Supplement A}
-%  \stitle{Title}
-%  \slink[url]{http://lib.stat.cmu.edu/aoas/???/???}
-%  \sdescription{Some text}
-%\end{supplement}
+\begin{supplement}[id=supp]
+  \sname{Supplement}
+  \stitle{Technical Appendices}
+  \slink[url]{http://lib.stat.cmu.edu/aoas/???/???}
+  \sdescription{The online supplement contains five technical appendices
+  with detailed material on the following topics:
+\begin{itemize}
+  \item[A.] Auger observatory exposure;
+  \item[B.] Algorithm for Markov chain Monte Carlo;
+  \item[C.] Cen~A single-source model;
+  \item[D.] Comparison with prior Bayesian work;
+  \item[E.] Model checking.
+\end{itemize}}
+\end{supplement}
 
 
 \bibliographystyle{plain}

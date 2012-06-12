@@ -1,0 +1,196 @@
+\documentclass[dvips,aoas,preprint]{imsart}
+%\documentclass[dvips,aoas]{imsart}
+
+\RequirePackage[OT1]{fontenc}
+\RequirePackage{amsthm,amsmath}
+\RequirePackage[numbers]{natbib}
+\RequirePackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+
+\usepackage{amssymb,amsbsy}
+\usepackage{mathtools}  % for \coloneqq
+%\usepackage[dvips]{graphics}
+\usepackage{graphicx}
+\usepackage{rotating}  % for sidewaystable
+
+% Suppress "Submitted to..."
+\setattribute{journal}{name}{}
+
+% Packages that aren't standard for AOAS:
+%\usepackage{subfig} 
+
+% Watermarking:
+%\usepackage{draftwatermark}
+%\SetWatermarkText{DRAFT}
+%\SetWatermarkLightness{0.9}
+%\SetWatermarkScale{5}  % default is 1.2
+
+% To typeset latex command names:
+\newcommand\cmdname[1]{{\tt \textbackslash#1}}
+\chardef\bslash=`\_
+
+%\usepackage{amsthm,amsmath,natbib}
+%\RequirePackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+
+% provide arXiv number if available:
+%\arxiv{math.PR/0000000}
+
+%===============================================================================
+% put your definitions there:
+\startlocaldefs
+
+% Load refs from the main paper.
+\usepackage{xr}
+\externaldocument{paper-aoas}
+
+% Prefix Supp eqn numbers to distinguish from main paper.
+\renewcommand{\theequation}{S.\arabic{equation}}
+
+% Macro for an "editorial note"; uncomment the 2nd definition to
+% produce a version without notes (put it in main doc if desired).
+
+\newcommand\enote[1]{{$\bullet\bullet\bullet$}{\sl [#1]}{$\bullet\bullet\bullet$}}
+
+%\renewcommand\enote[1]{\relax}
+
+% Marginal note (just a redef of \marginpar or \marginparodd).
+% Uncomment the 2nd definition to produce a version without notes (put it
+% in main doc if desired).
+% Could use \footnotesize for a bigger font.
+% The \hspace enables hyphenation of the 1st word.
+\setlength{\marginparwidth}{.85in}
+\newcommand\mnote[1]{\-\marginpar[\raggedleft\scriptsize\hspace*{0pt}#1]%
+{\raggedright\scriptsize\hspace*{0pt}#1}}
+%\renewcommand\mnote[1]{\relax}
+
+\newcommand{\txw}{\textwidth}
+
+\renewcommand{\arraystretch}{1.2}
+
+
+\newcommand{\bm}[1]{\mbox{\boldmath{$#1$}}}
+
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\ba}{\begin{eqnarray}}
+\newcommand{\ea}{\end{eqnarray}}
+\newcommand{\barr}{\begin{array}}
+\newcommand{\earr}{\end{array}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+
+\newcommand{\like}{{\cal L}}
+\newcommand{\pval}{$p$-value}
+\newcommand{\Eth}{E_{\rm th}}
+\newcommand{\Dmax}{D_{\rm max}}
+\newcommand{\Nsrc}{N_S}
+
+% Coincidence model macros; t* = target, h* = host:
+\newcommand{\tdrxn}{\omega}  % target (CR) direction
+\newcommand{\hdrxn}{\varpi}  % host (AGN) direction
+\newcommand{\expo}{\epsilon}  % exposure
+\newcommand{\tlabel}{\lambda}  % target label
+\newcommand{\Fvec}{\bm{F}}  % host fluxes
+\newcommand{\Aperp}{A_\perp}  % perp. area
+
+\newcommand{\D}{\overline{\mbox{D}}}
+
+\newcommand{\simless}{\mathbin{\lower 3pt\hbox
+   {$\rlap{\raise 5pt\hbox{$\char'074$}}\mathchar"7218$}}}
+\newcommand{\simgreat}{\mathbin{\lower 3pt\hbox
+   {$\rlap{\raise 5pt\hbox{$\char'076$}}\mathchar"7218$}}}
+\newcommand{\gta}{\simgreat}
+\newcommand{\lta}{\simless}
+\newcommand\msun{{\rm M}_\odot}
+\endlocaldefs
+
+%===============================================================================
+\begin{document}
+
+%===============================================================================
+\begin{frontmatter}
+
+% "Title of the paper"
+\title{Supplement to ``Multilevel Bayesian Framework for Modeling the Production,
+Propagation and Detection of Ultra High Energy Cosmic Rays''}
+
+% For footnote indicating draft status:
+% END OF TITLE TEXT\protect\thanksref{DRAFT}}
+%\thankstext{DRAFT}{This is an description of work in progress, prepared for
+%participants in the 2011 workshop, {\em Case Studies in Bayesian Statistics and
+%Machine Learning}.  {\bf PLEASE DO NOT CIRCULATE!}}
+
+% indicate corresponding author with \corref{}
+% \author{\fnms{John} \snm{Smith}\corref{}\ead[label=e1]{smith@foo.com}\thanksref{t1}}
+% \thankstext{t1}{Thanks to somebody}
+% \address{line 1\\ line 2\\ printead{e1}}
+% \affiliation{Some University}
+
+\author{\fnms{Kunlaya} \snm{Soiaporn}\corref{}\ead[label=e1s]{ks354@cornell.edu}},
+\address{\printead{e1s}}
+\author{\fnms{Thomas} \snm{Loredo}\ead[label=e2s]{loredo@astro.cornell.edu}},
+\address{\printead{e2s}}
+\author{\fnms{David} \snm{Chernoff}\ead[label=e3s]{cheroff@astro.cornell.edu}},
+\address{\printead{e3s}}
+\author{\fnms{David} \snm{Ruppert}\ead[label=e4s]{dr24@cornell.edu}}
+\address{\printead{e4s}}
+\and
+\author{\fnms{Ira} \snm{Wasserman}\ead[label=e5s]{ira@astro.cornell.edu}}
+\address{\printead{e5s}}
+\affiliation{Cornell University}
+
+
+\runauthor{Soiaporn, et al.}
+\runtitle{Supplement to Multilevel Models for Cosmic Rays}
+
+\begin{abstract}
+This supplement contains five technical appendices with detailed material on
+the following topics:
+\begin{itemize}\setlength{\itemindent}{5em}
+  \item[A.] Auger observatory exposure;
+  \item[B.] Algorithm for Markov chain Monte Carlo;
+  \item[C.] Cen~A single-source model;
+  \item[D.] Comparison with prior Bayesian work;
+  \item[E.] Model checking.
+\end{itemize}
+Equation and section numbers in this supplement refer to the main paper
+except when prefixed by ``S.''
+\end{abstract}
+
+
+%\begin{keyword}[class=AMS]
+%\kwd[Primary ]{}
+%\kwd{}
+%\kwd[; secondary ]{}
+%\end{keyword}
+
+
+\end{frontmatter}
+
+%===============================================================================
+
+
+\appendix
+
+\input{app-exposure}
+
+% \input{app-like}
+
+\input{app-computation}
+
+\input{app-CenA}
+
+\input{app-comparison}
+
+\input{app-checking-aoas}
+
+
+
+\bibliographystyle{plain}
+\newcommand{\apj}{Astrophysical Journal}
+\newcommand{\apjl}{Astrophysical Journal Letters}
+\newcommand{\mnras}{Monthly Notices of the Royal Astronomical Society}
+\newcommand{\jcap}{Journal of Cosmology and Astroparticle Physics}
+
+\bibliography{UHECR}
+
+\end{document}
