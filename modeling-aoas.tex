@@ -60,7 +60,7 @@ This requires introducing a latent arrival direction parameter for each ray.
 Here we adopt a simple phenomenological model with a single parameter
 specifying a typical scattering scale between the source and arrival
 directions.  As the data become more abundant and detailed, the framework
-can accomodate more complex models, e.g., with parameters explicitly
+can accommodate more complex models, e.g., with parameters explicitly
 describing cosmic magnetic fields and cosmic ray composition.
 \item {\em Detection and measurement}:  Last, we model detection and
 measurement, accounting for truncation and thinning of the incident
@@ -191,7 +191,7 @@ where the denominator is from the Jacobian of the transformation between
 parameterizations.  In general, an independent prior for $F_T$ and $f$
 corresponds to a dependent prior for $F_0$ and $F_A$.
 
-For the calculations below, we adopt exponential prior with scale $s$ for
+For the calculations below, we adopt an exponential prior with scale $s$ for
 $F_T$, and a beta prior for $f$ with shape parameters $(a,b)$, so
 \be
 g(F_T) = \frac{1}{s}e^{-F_T/s}
@@ -618,25 +618,25 @@ UHECRs may come from the isotropic background or either of the two closest
 AGNs, Cen~A (NGC~5128) and NGC~4945; this model is motivated in part by
 recent suggestions that most UHECRs may be heavy nuclei from a single nearby
 source, as cited above.  
-(We also briefly explore a similarly-motivated fourth
-model that assigns all UHECRs to Cen~A; as noted below, this model
-is tenable only for $\kappa\approx 0$.)  In order to compare models $M_1$
-and $M_2$ to the null model, we compute the Bayes factors:
+(We also briefly explore a similarly-motivated fourth model that assigns all
+UHECRs to Cen~A; as noted below, this model is tenable only for
+$\kappa\approx 0$.)  In order to compare models $M_1$ and $M_2$ (conditioned
+on $\kappa$) to the null model, we compute the Bayes factors:
 \be
 \mbox{BF}_{10}(\kappa) = \frac{\like_{m,1}(\kappa)}{\like_{m,0}},
 \qquad
 \mbox{ BF}_{20}(\kappa) = \frac{\like_{m,2}(\kappa)}{\like_{m,0}}
 \label{BF10+20}
 \ee
-where $\like_{m,0}(\kappa)$ is the marginal likelihood for the null
-model, conditioned on $\kappa$ (similar equations hold for models
-that marginalize over $\kappa$).  The value of $\like_{m,0}(\kappa)$
+where $\like_{m,0}$ is the marginal likelihood for the null
+model (similar equations hold for models
+that marginalize over $\kappa$).  The value of $\like_{m,0}$
 can be found from equation~(\ref{like-assoc}), noting that for the
 null model, there is only one term in the sum over $\lambda$
 (with all $\lambda_i = 0$, since the only allowed value of $k$ is $k=0$).
 Marginalizing this term over $F_T$ (equal to $F_0$ in this case) gives
 \be
-\like_{m,0}(\kappa) =
+\like_{m,0} =
   \frac{1}{s}
   \left(\frac{s}{s\epsilon_0+1}\right)^{N_C+1}
   \Gamma(N_C+1) \times \prod_i f_{0,i}.
