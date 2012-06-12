@@ -12,3 +12,4 @@
 *.synctex.gz
 *.spl
 p.ps
+jetsam/*.tex
