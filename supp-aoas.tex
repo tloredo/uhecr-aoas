@@ -42,8 +42,10 @@
 \usepackage{xr}
 \externaldocument{paper-aoas}
 
-% Prefix Supp eqn numbers to distinguish from main paper.
-\renewcommand{\theequation}{S.\arabic{equation}}
+% Prefix Supp eqn numbers, etc., to distinguish from main paper.
+\renewcommand{\theequation}{S-\arabic{equation}}
+\renewcommand{\thefigure}{S-\arabic{figure}}
+\renewcommand{\thetable}{S-\arabic{table}}
 
 % Macro for an "editorial note"; uncomment the 2nd definition to
 % produce a version without notes (put it in main doc if desired).
@@ -152,8 +154,8 @@ the following topics:
   \item[D.] Comparison with prior Bayesian work;
   \item[E.] Model checking.
 \end{itemize}
-Equation and section numbers in this supplement refer to the main paper
-except when prefixed by ``S.''
+Equation, section, figure, and table numbers in this supplement refer to the
+main paper except when prefixed by ``S.''
 \end{abstract}
 
 
