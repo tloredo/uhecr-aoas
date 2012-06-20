@@ -2,8 +2,8 @@
 # NOTE:  To process supp-aoas, you need to have already processed paper-aoas
 # and left its aux file in place.
 
-#paper=paper-arxiv
-paper=paper-aoas
+paper=paper-arxiv
+#paper=paper-aoas
 #paper=supp-aoas
 
 # This uses dvips; PDF figs not supported.
@@ -92,6 +92,8 @@ ARXIV_INPUTS = intro-arxiv.tex data-arxiv.tex modeling-arxiv.tex results-arxiv.t
 arxiv:
 	tar czf arxiv.tgz paper-arxiv.tex paper-arxiv.bbl imsart.sty imsart.cls \
 	$(ARXIV_INPUTS) $(ARXIV_FIGS)
+	mkdir test
+	tar -C test -xf arxiv.tgz
 
 AOAS_FIGS = CR+LocalAGN-all.eps CRCoincLevels.eps BF_kappa_17AGNs_1+2.eps postf.eps kappa_f-log_kappa.eps posterior_f_all_margOverKappa.eps posterior_FT_all_margOverKappa.eps avg_pjxn_factor.eps BF-CenAvsIsotropic-SmallKappa.eps margf_kappa1000_17AGNs.eps BF_changepoint_17AGNs.eps BF_changepoint_2AGNs.eps BF_cumplot_genUnif_14CRs_logscale.eps BFCumplot-AssocnSimn.eps
 AOAS_INPUTS = intro-aoas.tex data-aoas.tex modeling-aoas.tex results-aoas.tex discussion.tex app-exposure.tex app-like.tex app-computation.tex app-CenA.tex app-comparison.tex app-checking-aoas.tex
@@ -99,3 +101,5 @@ AOAS_INPUTS = intro-aoas.tex data-aoas.tex modeling-aoas.tex results-aoas.tex di
 aoas:
 	tar czf aoas.tgz paper-aoas.tex paper-aoas.bbl supp-aoas.tex supp-aoas.bbl \
 	imsart.sty imsart.cls $(AOAS_INPUTS) $(AOAS_FIGS)
+	mkdir test
+	tar -C test -xf aos.tgz
