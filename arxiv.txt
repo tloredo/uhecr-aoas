@@ -1,0 +1,106 @@
+Multilevel Bayesian Framework for Modeling the Production,
+Propagation and Detection of Ultra High Energy Cosmic Rays
+
+Kunlaya Soiaporn, David Chernoff, Thomas Loredo, David Ruppert, Ira Wasserman
+
+
+The sources of ultra-high energy cosmic rays (UHECRs) are unknown but are
+likely nearby galaxies.  To assess  association of UHECRs and candidate
+sources, we developed a  multilevel Bayesian framework.  We demonstrate this
+framework using simple models similar to those in previous studies, but our
+results suggest a need for more complex models; these also can be fit within
+our framework.  We use MCMC methods to implement the approach to model data on
+69 UHECRs observed by the Pierre Auger Observatory (PAO) during 2004-2009,
+using a volume-complete catalog of 17 nearby active galactic nuclei (AGN) as
+candidate sources.  The reported PAO data are incomplete; an early portion
+(Period 1) was used to set an energy cut maximizing anisotropy, and only
+cosmic rays above that cut are reported. This data-tuning proves problematic
+for independent analyses.  Assuming a common, isotropic UHECR emission rate
+("standard candles") and using the untuned data after Period 1, there is no
+significant evidence for association of UHECRs with nearby AGNs versus an
+isotropic population of sources.  If the association model is adopted, the
+fraction of UHECRs  associated with these AGN is likely nonzero but well below
+50%. Relatively small magnetic deflections are favored; models that assign a
+large fraction of UHECRs to a single nearby source are ruled out unless very
+large deflections are specified a priori.  Including Period 1 data alters the
+conclusions significantly, and a simulation study suggests that the Period 1
+data are anomalous, presumably due to the tuning.  Accurate and optimal
+analysis of future data will likely require more complete disclosure of the
+data.
+
+
+56 pp, 13 figures.
+An abridged version is submitted for publication to Annals of Applied
+Statistics.
+
+
+MSC classes (#s only, from http://www.ams.org/mathscinet/msc/msc2010.html):
+85A35 Statistical astronomy;
+62F15 Bayesian inference;
+62H11 Directional data; spatial statistics;
+62P35 Applications to physics
+
+Categories	
+   Primary:	  High Energy Astrophysical Phenomena (astro-ph.HE)   
+   Cross lists:	
+Instrumentation and Methods for Astrophysics (astro-ph.IM)
+Applications (stat.AP)    
+
+
+Problem with CRCoincLevels.eps:
+Contains Helvetica fonts (OmniGraffle can't turn this off), and the
+font lines start with "%" which screws up arXiv's AutoTeX.  Reprocess
+with eps2eps -> CRCoincLevels2.eps.
+
+==================
+Your submission submit/0498347 has been assigned the permanent arXiv
+identifier 1206.4569 and is available at:
+
+http://arxiv.org/abs/1206.4569
+
+ 
+The paper password for this article is: 5beux
+Please share this with your co-authors. They may use it to claim
+ownership.
+
+
+Abstract will appear in today's mailing as:
+------------------------------------------------------------------------------
+\\
+arXiv:1206.4569
+From: Thomas Loredo <loredo@astro.cornell.edu>
+Date: Wed, 20 Jun 2012 18:13:01 GMT   (899kb)
+
+Title: Multilevel Bayesian Framework for Modeling the Production, Propagation
+  and Detection of Ultra-High Energy Cosmic Rays
+Authors: Kunlaya Soiaporn, David Chernoff, Thomas Loredo, David Ruppert, Ira
+  Wasserman
+Categories: astro-ph.HE astro-ph.IM stat.AP
+Comments: 56 pp, 13 figures. An abridged version is submitted for publication
+  to Annals of Applied Statistics
+MSC-class: 85A35 62F15 62H11 62P35
+License: http://arxiv.org/licenses/nonexclusive-distrib/1.0/
+\\
+  The sources of ultra-high energy cosmic rays (UHECRs) are unknown but are
+likely nearby galaxies. To assess association of UHECRs and candidate sources,
+we developed a multilevel Bayesian framework. We demonstrate this framework
+using simple models similar to those in previous studies, but our results
+suggest a need for more complex models; these also can be fit within our
+framework. We use MCMC methods to implement the approach to model data on 69
+UHECRs observed by the Pierre Auger Observatory (PAO) during 2004-2009, using a
+volume-complete catalog of 17 nearby active galactic nuclei (AGN) as candidate
+sources. The reported PAO data are incomplete; an early portion (Period 1) was
+used to set an energy cut maximizing anisotropy, and only cosmic rays above
+that cut are reported. This data-tuning proves problematic for independent
+analyses. Assuming a common, isotropic UHECR emission rate ("standard candles")
+and using the untuned data after Period 1, there is no significant evidence for
+association of UHECRs with nearby AGNs versus an isotropic population of
+sources. If the association model is adopted, the fraction of UHECRs associated
+with these AGN is likely nonzero but well below 50%. Relatively small magnetic
+deflections are favored; models that assign a large fraction of UHECRs to a
+single nearby source are ruled out unless very large deflections are specified
+a priori. Including Period 1 data alters the conclusions significantly, and a
+simulation study suggests that the Period 1 data are anomalous, presumably due
+to the tuning. Accurate and optimal analysis of future data will likely require
+more complete disclosure of the data.
+\\
