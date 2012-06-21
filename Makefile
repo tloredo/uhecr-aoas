@@ -102,4 +102,4 @@ aoas:
 	tar czf aoas.tgz paper-aoas.tex paper-aoas.bbl supp-aoas.tex supp-aoas.bbl \
 	imsart.sty imsart.cls $(AOAS_INPUTS) $(AOAS_FIGS)
 	mkdir test
-	tar -C test -xf aos.tgz
+	tar -C test -xf aoas.tgz
