@@ -66,7 +66,8 @@ approximate the likelihood functions with a Fisher distribution with mode at
 the best-fit direction for each cosmic ray, and with concentration parameter
 $\kappa_c = 9323$, corresponding to a 68.3\% confidence region with an
 angular radius of 0.9$^\circ$.  Let $d_i$ denote the data associated with
-cosmic ray $i$, and $\omega_i$ denote its actual arrival direction.  The
+cosmic ray $i$, and $\omega_i$ denote its actual arrival direction (an
+unknown parameter).  The
 likelihood function for the direction is
 \ba
 \ell(\omega_i)
@@ -74,7 +75,8 @@ likelihood function for the direction is
    \approx \frac{\kappa_c}{4\pi\sinh(\kappa_c)} \exp(\kappa_c n_i\cdot\omega_i),
 \label{ell-def}
 \ea
-where $n_i$ denotes the best-fit direction for cosmic ray $i$, and we have
+where $n_i$ denotes the best-fit direction for cosmic ray $i$ (a function
+of the observed data), and we have
 scaled the likelihood function so its integral over $\omega_i$ is unity,
 merely as a convenient convention.  Bonifazi et al.\
 \cite{B+PAO09-DrxnUncert} provide more information about the PAO direction
