@@ -3,8 +3,8 @@
 # and left its aux file in place.
 
 #paper=paper-arxiv
-paper=paper-aoas
-#paper=supp-aoas
+#paper=paper-aoas
+paper=supp-aoas
 
 # This uses dvips; PDF figs not supported.
 
@@ -74,7 +74,7 @@ endif
 # Creates refs-gather-bbl.tex for pasting into bibliography environment.
 refs:  $(paper).tex UHECR.bib
 	bibtex $(paper)
-	mv $(paper).bbl $(paper)-bbl.tex
+	# mv $(paper).bbl $(paper)-bbl.tex
 	echo '***** FIX YEARS IN REFS!!! *****'
 
 clean:
