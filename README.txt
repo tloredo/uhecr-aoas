@@ -1,1 +1,1 @@
-UHECR paper for AoAS
+UHECR paper for AoAS; also includes longer arXiv version
